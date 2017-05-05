@@ -21,7 +21,8 @@ class ModalComponent extends React.Component {
     this.props.closeModal();
   };
 
-  handleAddSubCategory = () => {
+  handleAddSubCategory = (e) => {
+    e.preventDefault();
     const name = this.state.categoryName;
     const parentId = this.props.parentId;
     this.props.addSubCategory(name, parentId);
@@ -38,7 +39,7 @@ class ModalComponent extends React.Component {
         </Modal.Header>
 
         <Modal.Body>
-          <form>
+          <form onSubmit={this.handleAddSubCategory}>
             <FormGroup>
               <FormControl
                 autoFocus
@@ -47,7 +48,6 @@ class ModalComponent extends React.Component {
                 value={this.state.categoryName}
                 onChange={this.handleChangeCategoryName}
               />
-              <FormControl.Feedback />
             </FormGroup>
           </form>
         </Modal.Body>
