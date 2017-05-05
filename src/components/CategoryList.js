@@ -1,4 +1,5 @@
 import React from 'react';
+import {ListGroup, ListGroupItem, Form, FormControl, Button} from 'react-bootstrap';
 
 class CategoryList extends React.Component {
   constructor(props) {
@@ -25,20 +26,24 @@ class CategoryList extends React.Component {
     allCategories.forEach(category => {
       if(idsToRender.indexOf(category.id) >= 0) {
         categoriesToRender.push(
-          <li key={category.id}>
+          <ListGroupItem key={category.id}>
             {category.name}
-            <button onClick={() => {
-              this.props.showModal(category.id)
-            }}>
-              +
-            </button>
+            <Button bsSize="xsmall" onClick={() => {this.props.showModal(category.id)}}>
+              <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </Button>
+            <Button bsSize="xsmall">
+              <span className="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+            </Button>
+            <Button bsStyle="danger" bsSize="xsmall">
+              <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </Button>
             {category.children.length ? this.renderCategories(category.children, allCategories) : null}
-          </li>
+          </ListGroupItem>
         )
       }
 
     });
-    return <ul>{categoriesToRender}</ul>;
+    return <ListGroup>{categoriesToRender}</ListGroup>;
   };
 
   render(){
@@ -46,12 +51,16 @@ class CategoryList extends React.Component {
     const rootCategoriesIds = categories.filter(category => category.parentId === null).map(category => category.id);
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" value={this.state.input} onChange={this.handleInputChange}/>
-          <button>
+        <Form inline onSubmit={this.handleSubmit}>
+          <FormControl
+            type="text"
+            placeholder="Enter text"
+            value={this.state.input}
+            onChange={this.handleInputChange}/>
+          <Button type="submit">
             Add category
-          </button>
-        </form>
+          </Button>
+        </Form>
         {categories.length && this.renderCategories(rootCategoriesIds, categories)}
       </div>
     )

@@ -54,7 +54,7 @@ class ModalComponent extends React.Component {
 
         <Modal.Footer>
           <Button onClick={this.handleCloseModal}>Close</Button>
-          <Button onClick={this.handleAddSubCategory} bsStyle="primary">Add</Button>
+          <Button type="submit" onClick={this.handleAddSubCategory} bsStyle="primary">Add</Button>
         </Modal.Footer>
       </Modal>
     )

@@ -21,40 +21,6 @@ const initialCategories = [
   }
 ];
 
-
-// const initialCategories = [
-//   {
-//     name: 'category1',
-//     id: 1,
-//     parentId: null,
-//     children: null,
-//   },
-//   {
-//     name: 'category2',
-//     id: 2,
-//     parentId: null,
-//     children: [3],
-//   },
-//   {
-//     name: 'category3',
-//     id: 3,
-//     parentId: 2,
-//     children: [4],
-//   },
-//   {
-//     name: 'category4',
-//     id: 4,
-//     parentId: 3,
-//     children: null,
-//   },
-//   {
-//     name: 'category5',
-//     id: 5,
-//     parentId: null,
-//     children: [],
-//   },
-// ];
-
 const initialModal = {
   show: false,
   parentId: null,
@@ -73,7 +39,7 @@ const categories = (state = initialCategories, action) => {
           children: [...category.children, newCategory.id]
         }
       });
-      return [...newState, newCategory];
+      return [newCategory, ...newState];
     default:
       return state;
   }
