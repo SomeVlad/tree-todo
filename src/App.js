@@ -15,7 +15,7 @@ class App extends Component {
         {/*<StatusBarContainer />*/}
         <CategoryListContainer />
         {/*<ToDoListContainer />*/}
-        <ModalContainer/>
+        <ModalContainer />
       </div>
     );
   }

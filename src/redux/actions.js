@@ -1,14 +1,16 @@
 import shortid from 'shortid'
 
 export const ADD_CATEGORY = 'ADD_CATEGORY';
-export const SHOW_MODAL = 'SHOW_MODAL';
+export const ADD_SUBCATEGORY = 'ADD_SUBCATEGORY';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
+export const EDIT_CATEGORY = 'EDIT_CATEGORY';
+export const SAVE_CATEGORY = 'SAVE_CATEGORY';
 
 export function addCategory(name, parentId) {
   return {
     type: ADD_CATEGORY,
     payload: {
-      name: name,
+      name,
       id: shortid.generate(),
       parentId: parentId || null,
       children: [],
@@ -16,9 +18,9 @@ export function addCategory(name, parentId) {
   }
 }
 
-export function showModal(parentId) {
+export function addSubcategory(parentId) {
   return {
-    type: SHOW_MODAL,
+    type: ADD_SUBCATEGORY,
     payload: parentId,
   }
 }
@@ -28,3 +30,24 @@ export function closeModal() {
     type: CLOSE_MODAL,
   }
 }
+
+export function editCategory(id, currentName) {
+  return {
+    type: EDIT_CATEGORY,
+    payload: {
+      id,
+      currentName, 
+    },
+  }
+}
+
+export function saveCategory(id, name) {
+  return {
+    type: SAVE_CATEGORY,
+    payload: {
+      id,
+      name,
+    }
+  }
+}
+

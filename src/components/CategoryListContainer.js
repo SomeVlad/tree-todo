@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import CategoryList from './CategoryList';
-import {addCategory, showModal} from '../redux/actions';
+import {addCategory, addSubcategory, editCategory} from '../redux/actions';
 
 
 const mapStateToProps = (state) => {
@@ -11,12 +11,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addCategory: (name) => {
-      dispatch(addCategory(name));
-    },
-    showModal: (parentId) => {
-      dispatch(showModal(parentId));
-    }
+    addCategory: name => dispatch(addCategory(name)),
+    addSubcategory: parentId => dispatch(addSubcategory(parentId)),
+    editCategory: (id, currentName) => dispatch(editCategory(id, currentName)),
   }
 };
 

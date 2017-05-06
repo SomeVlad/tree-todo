@@ -2,8 +2,10 @@ import { combineReducers } from 'redux';
 import shortid from 'shortid';
 import {
   ADD_CATEGORY,
-  SHOW_MODAL,
+  ADD_SUBCATEGORY,
   CLOSE_MODAL,
+  EDIT_CATEGORY,
+  SAVE_CATEGORY,
 } from './actions';
 
 const initialCategories = [
@@ -23,23 +25,39 @@ const initialCategories = [
 
 const initialModal = {
   show: false,
+  mode: null,
   parentId: null,
+  id: null,
+  defaultValue: null,
 };
 
 const categories = (state = initialCategories, action) => {
   switch (action.type) {
+
     case ADD_CATEGORY:
       const newCategory = action.payload;
       const newState = state.map(category => {
-        if(category.id !== newCategory.parentId) {
-          return category
+        if(category.id == newCategory.parentId) {
+          return {
+            ...category,
+            children: [...category.children, newCategory.id]
+          }
         }
-        return {
-          ...category,
-          children: [...category.children, newCategory.id]
-        }
-      });
+        return category
+      })
       return [newCategory, ...newState];
+
+    case SAVE_CATEGORY:
+      return state.map(category => {
+        if(category.id === action.payload.id) {
+          return {
+            ...category,
+            name: action.payload.name
+          }
+        }
+        return category;
+      })
+
     default:
       return state;
   }
@@ -47,10 +65,11 @@ const categories = (state = initialCategories, action) => {
 
 const modal = (state = initialModal, action) => {
   switch (action.type) {
-    case SHOW_MODAL:
+    case ADD_SUBCATEGORY:
       return {
         ...state,
         show: true,
+        mode: 'add',
         parentId: action.payload,
       };
     case CLOSE_MODAL:
@@ -58,7 +77,18 @@ const modal = (state = initialModal, action) => {
         ...state,
         show: false,
         parentId: null,
+        mode: null,
+        id: null,
+        defaultValue: null,
       };
+    case EDIT_CATEGORY:
+      return {
+        ...state,
+        show: true,
+        mode: 'edit',
+        id: action.payload.id,
+        defaultValue: action.payload.currentName,
+      }
     default:
       return state;
   }

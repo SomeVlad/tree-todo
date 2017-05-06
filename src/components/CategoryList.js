@@ -1,5 +1,5 @@
 import React from 'react';
-import {ListGroup, ListGroupItem, Form, FormControl, Button} from 'react-bootstrap';
+import {Form, FormControl, Button} from 'react-bootstrap';
 
 class CategoryList extends React.Component {
   constructor(props) {
@@ -20,30 +20,29 @@ class CategoryList extends React.Component {
     this.props.addCategory(this.state.input);
     this.setState({input: ''});
   };
-  //
+
   renderCategories = (idsToRender, allCategories) => {
     const categoriesToRender = [];
     allCategories.forEach(category => {
       if(idsToRender.indexOf(category.id) >= 0) {
         categoriesToRender.push(
-          <ListGroupItem key={category.id}>
+          <li key={category.id}>
             {category.name}
-            <Button bsSize="xsmall" onClick={() => {this.props.showModal(category.id)}}>
+            <Button bsSize="xsmall" onClick={() => {this.props.addSubcategory(category.id)}}>
               <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </Button>
-            <Button bsSize="xsmall">
+            <Button bsSize="xsmall" onClick={() => {this.props.editCategory(category.id, category.name)}}>
               <span className="glyphicon glyphicon-pencil" aria-hidden="true"></span>
             </Button>
             <Button bsStyle="danger" bsSize="xsmall">
               <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </Button>
             {category.children.length ? this.renderCategories(category.children, allCategories) : null}
-          </ListGroupItem>
+          </li>
         )
       }
-
     });
-    return <ListGroup>{categoriesToRender}</ListGroup>;
+    return <ul>{categoriesToRender}</ul>;
   };
 
   render(){

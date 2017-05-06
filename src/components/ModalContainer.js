@@ -1,7 +1,7 @@
 import {Modal, Button, FormGroup, FormControl} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import React from 'react';
-import {closeModal, addCategory} from '../redux/actions';
+import {closeModal, addCategory, saveCategory} from '../redux/actions';
 
 
 class ModalComponent extends React.Component {
@@ -10,6 +10,12 @@ class ModalComponent extends React.Component {
     this.state = {
       categoryName: '',
     };
+  }
+
+  componentWillReceiveProps = (newProps) => {
+    if(newProps.defaultValue) {
+      this.setState({categoryName: newProps.defaultValue});
+    }
   }
 
   handleChangeCategoryName = (e) => {
@@ -24,14 +30,31 @@ class ModalComponent extends React.Component {
   handleAddSubCategory = (e) => {
     e.preventDefault();
     const name = this.state.categoryName;
-    const parentId = this.props.parentId;
-    this.props.addSubCategory(name, parentId);
-    this.props.closeModal();
+    const {parentId, addSubCategory, closeModal} = this.props;
+    addSubCategory(name, parentId);
+    closeModal();
     this.setState({categoryName: ''});
   };
 
+  handleSaveCategory = (e) => {
+    e.preventDefault();
+    const name = this.state.categoryName;
+    const {id, saveCategory, closeModal} = this.props;
+    saveCategory(id, name);
+    closeModal();
+    this.setState({categoryName: ''})
+  }
+
   render() {
-    const {show} = this.props;
+    const {show, mode} = this.props;
+    
+    let submitButton;
+    if (mode === 'add') {
+      submitButton = <Button type="submit" onClick={this.handleAddSubCategory} bsStyle="primary">Add</Button>
+    } else if (mode === 'edit') {
+      submitButton = <Button type="submit" onClick={this.handleSaveCategory} bsStyle="primary">Save</Button>
+    }
+
     return(
       <Modal show={show}>
         <Modal.Header>
@@ -54,7 +77,7 @@ class ModalComponent extends React.Component {
 
         <Modal.Footer>
           <Button onClick={this.handleCloseModal}>Close</Button>
-          <Button type="submit" onClick={this.handleAddSubCategory} bsStyle="primary">Add</Button>
+          {submitButton}
         </Modal.Footer>
       </Modal>
     )
@@ -64,18 +87,18 @@ class ModalComponent extends React.Component {
 const mapStateToProps = (state) => {
   return {
     show: state.modal.show,
+    mode: state.modal.mode,
     parentId: state.modal.parentId,
+    id: state.modal.id,
+    defaultValue: state.modal.defaultValue,
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    closeModal: () => {
-      dispatch(closeModal());
-    },
-    addSubCategory: (name, parentId) => {
-      dispatch(addCategory(name, parentId));
-    },
+    closeModal: () => dispatch(closeModal()),
+    addSubCategory: (name, parentId) => dispatch(addCategory(name, parentId)),
+    saveCategory: (id, name) => dispatch(saveCategory(id, name)),
   }
 };
 
