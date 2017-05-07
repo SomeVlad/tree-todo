@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Modal, Button} from 'react-bootstrap';
 // import FilterContainer from './FilterContainer';
 // import StatusBarContainer from './StatusBarContainer';
 import CategoryListContainer from './components/CategoryListContainer';

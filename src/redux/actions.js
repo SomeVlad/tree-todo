@@ -5,6 +5,7 @@ export const ADD_SUBCATEGORY = 'ADD_SUBCATEGORY';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const EDIT_CATEGORY = 'EDIT_CATEGORY';
 export const SAVE_CATEGORY = 'SAVE_CATEGORY';
+export const DELETE_CATEGORY = 'DELETE_CATEGORY';
 
 export function addCategory(name, parentId) {
   return {
@@ -51,3 +52,9 @@ export function saveCategory(id, name) {
   }
 }
 
+export function deleteCategory(categories) {
+  return {
+    type: DELETE_CATEGORY,
+    payload: categories,
+  }
+}

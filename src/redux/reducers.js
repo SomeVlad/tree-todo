@@ -6,6 +6,7 @@ import {
   CLOSE_MODAL,
   EDIT_CATEGORY,
   SAVE_CATEGORY,
+  DELETE_CATEGORY,
 } from './actions';
 
 const initialCategories = [
@@ -37,7 +38,7 @@ const categories = (state = initialCategories, action) => {
     case ADD_CATEGORY:
       const newCategory = action.payload;
       const newState = state.map(category => {
-        if(category.id == newCategory.parentId) {
+        if(category.id === newCategory.parentId) {
           return {
             ...category,
             children: [...category.children, newCategory.id]
@@ -57,6 +58,14 @@ const categories = (state = initialCategories, action) => {
         }
         return category;
       })
+
+      case DELETE_CATEGORY:
+        return state.filter(category => {
+          if(action.payload.indexOf(category.id) >= 0){
+            return false
+          }
+          return true
+        })
 
     default:
       return state;

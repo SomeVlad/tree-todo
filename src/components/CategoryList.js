@@ -9,21 +9,20 @@ class CategoryList extends React.Component {
     }
   }
 
-  renderedCategoryIds = [];
-
   handleInputChange = (e) => {
-    this.setState({ input:e.target.value })
+    this.setState({input: e.target.value})
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.addCategory(this.state.input);
+    const name = this.state.input
+    this.props.addCategory(name);
     this.setState({input: ''});
   };
 
-  renderCategories = (idsToRender, allCategories) => {
+  renderCategories = (idsToRender, categories) => {
     const categoriesToRender = [];
-    allCategories.forEach(category => {
+    categories.forEach(category => {
       if(idsToRender.indexOf(category.id) >= 0) {
         categoriesToRender.push(
           <li key={category.id}>
@@ -34,16 +33,32 @@ class CategoryList extends React.Component {
             <Button bsSize="xsmall" onClick={() => {this.props.editCategory(category.id, category.name)}}>
               <span className="glyphicon glyphicon-pencil" aria-hidden="true"></span>
             </Button>
-            <Button bsStyle="danger" bsSize="xsmall">
+            <Button
+              bsStyle="danger"
+              bsSize="xsmall"
+              onClick={() => { this.handleDeleteCategory(category.id)}}
+            >
               <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </Button>
-            {category.children.length ? this.renderCategories(category.children, allCategories) : null}
+            {category.children.length ? this.renderCategories(category.children, categories) : null}
           </li>
         )
       }
     });
     return <ul>{categoriesToRender}</ul>;
   };
+
+  handleDeleteCategory = id => {
+    const { categories,  deleteCategory} = this.props;
+    const categoriesToDelete = [];
+    const findCategoriesToDelete = id => {
+      categoriesToDelete.push(id);
+      const children = categories.find(category => category.id === id).children;
+      children.forEach(child => findCategoriesToDelete(child)); 
+    }
+    findCategoriesToDelete(id);
+    deleteCategory(categoriesToDelete);
+  }
 
   render(){
     const { categories } = this.props;

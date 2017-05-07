@@ -8,41 +8,41 @@ class ModalComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      categoryName: '',
+      inputValue: '',
     };
   }
 
   componentWillReceiveProps = (newProps) => {
     if(newProps.defaultValue) {
-      this.setState({categoryName: newProps.defaultValue});
+      this.setState({inputValue: newProps.defaultValue});
     }
   }
 
   handleChangeCategoryName = (e) => {
-    this.setState({categoryName: e.target.value})
+    this.setState({inputValue: e.target.value})
   };
 
   handleCloseModal = () => {
-    this.setState({categoryName: ''});
+    this.setState({inputValue: ''});
     this.props.closeModal();
   };
 
   handleAddSubCategory = (e) => {
     e.preventDefault();
-    const name = this.state.categoryName;
+    const name = this.state.inputValue;
     const {parentId, addSubCategory, closeModal} = this.props;
     addSubCategory(name, parentId);
+    this.setState({inputValue: ''});
     closeModal();
-    this.setState({categoryName: ''});
   };
 
   handleSaveCategory = (e) => {
     e.preventDefault();
-    const name = this.state.categoryName;
+    const name = this.state.inputValue;
     const {id, saveCategory, closeModal} = this.props;
     saveCategory(id, name);
+    this.setState({inputValue: ''})
     closeModal();
-    this.setState({categoryName: ''})
   }
 
   render() {
@@ -68,7 +68,7 @@ class ModalComponent extends React.Component {
                 autoFocus
                 type="text"
                 placeholder="Enter text"
-                value={this.state.categoryName}
+                value={this.state.inputValue}
                 onChange={this.handleChangeCategoryName}
               />
             </FormGroup>
