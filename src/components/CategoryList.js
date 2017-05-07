@@ -75,7 +75,7 @@ class CategoryList extends React.Component {
             Add category
           </Button>
         </Form>
-        {categories.length && this.renderCategories(rootCategoriesIds, categories)}
+        {categories.length ? this.renderCategories(rootCategoriesIds, categories) : null}
       </div>
     )
   }
