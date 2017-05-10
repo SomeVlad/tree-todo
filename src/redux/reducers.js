@@ -45,7 +45,7 @@ const categories = (state = initialCategories, action) => {
           }
         }
         return category
-      })
+      });
       return [newCategory, ...newState];
 
     case SAVE_CATEGORY:
@@ -57,15 +57,10 @@ const categories = (state = initialCategories, action) => {
           }
         }
         return category;
-      })
+      });
 
       case DELETE_CATEGORY:
-        return state.filter(category => {
-          if(action.payload.indexOf(category.id) >= 0){
-            return false
-          }
-          return true
-        })
+        return state.filter(category => action.payload.indexOf(category.id) === -1);
 
     default:
       return state;
@@ -97,7 +92,7 @@ const modal = (state = initialModal, action) => {
         mode: 'edit',
         id: action.payload.id,
         defaultValue: action.payload.currentName,
-      }
+      };
     default:
       return state;
   }
