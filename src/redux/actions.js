@@ -52,7 +52,7 @@ export function saveCategory(id, name) {
   }
 }
 
-export function deleteCategory(categories) {
+export function deleteCategories(categories) {
   return {
     type: DELETE_CATEGORY,
     payload: categories,

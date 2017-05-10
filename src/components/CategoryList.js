@@ -28,17 +28,17 @@ class CategoryList extends React.Component {
           <li key={category.id}>
             {category.name}
             <Button bsSize="xsmall" onClick={() => {this.props.addSubcategory(category.id)}}>
-              <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
+              <span className="glyphicon glyphicon-plus" aria-hidden="true"/>
             </Button>
             <Button bsSize="xsmall" onClick={() => {this.props.editCategory(category.id, category.name)}}>
-              <span className="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+              <span className="glyphicon glyphicon-pencil" aria-hidden="true"/>
             </Button>
             <Button
               bsStyle="danger"
               bsSize="xsmall"
               onClick={() => { this.handleDeleteCategory(category.id)}}
             >
-              <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
+              <span className="glyphicon glyphicon-remove" aria-hidden="true"/>
             </Button>
             {category.children.length ? this.renderCategories(category.children, categories) : null}
           </li>
@@ -48,17 +48,27 @@ class CategoryList extends React.Component {
     return <ul>{categoriesToRender}</ul>;
   };
 
+
+
   handleDeleteCategory = id => {
-    const { categories,  deleteCategory} = this.props;
+    const { categories,  deleteCategories} = this.props;
     const categoriesToDelete = [];
     const findCategoriesToDelete = id => {
       categoriesToDelete.push(id);
       const children = categories.find(category => category.id === id).children;
       children.forEach(child => findCategoriesToDelete(child)); 
-    }
-    findCategoriesToDelete(id);
-    deleteCategory(categoriesToDelete);
-  }
+    };
+
+    const findChildren = (id, categories) => {
+      const children = categories.find(category => category.id === id).children;
+      if(!children.length) {
+        return id;
+      }
+      return [id].concat(children.map(child => findChildren(child, categories)));
+    };
+
+    deleteCategories(findChildren(id, categories));
+  };
 
   render(){
     const { categories } = this.props;
@@ -79,6 +89,8 @@ class CategoryList extends React.Component {
       </div>
     )
   }
-};
+}
 
 export default CategoryList;
+
+
