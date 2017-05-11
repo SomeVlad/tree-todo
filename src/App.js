@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import {Col} from 'react-bootstrap';
 // import FilterContainer from './FilterContainer';
 // import StatusBarContainer from './StatusBarContainer';
 import CategoryListContainer from './components/CategoryListContainer';
-// import ToDoListContainer from './ToDoListContainer';
+import ToDoListContainer from './components/ToDoListContainer';
 import ModalContainer from './components/ModalContainer';
-import './App.css';
 
 class App extends Component {
   render() {
@@ -12,8 +12,12 @@ class App extends Component {
       <div>
         {/*<FilterContainer />*/}
         {/*<StatusBarContainer />*/}
-        <CategoryListContainer />
-        {/*<ToDoListContainer />*/}
+        <Col md={6}>
+          <CategoryListContainer />
+        </Col>
+        <Col md={6}>
+          <ToDoListContainer />
+        </Col>
         <ModalContainer />
       </div>
     );

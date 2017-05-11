@@ -7,6 +7,7 @@ import {
   EDIT_CATEGORY,
   SAVE_CATEGORY,
   DELETE_CATEGORY,
+  SET_ACTIVE_CATEGORY,
 } from './actions';
 
 const initialCategories = [
@@ -98,6 +99,15 @@ const modal = (state = initialModal, action) => {
   }
 };
 
-const rootReducer = combineReducers({categories, modal});
+const activeCategory = (state = null, action) => {
+  switch (action.type) {
+    case SET_ACTIVE_CATEGORY:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+const rootReducer = combineReducers({categories, modal, activeCategory});
 
 export default rootReducer;

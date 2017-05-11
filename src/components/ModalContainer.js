@@ -12,7 +12,7 @@ class ModalComponent extends React.Component {
     };
   }
 
-  componentWillReceiveProps = (newProps) => {
+  componentWillReceiveProps(newProps){
     if(newProps.defaultValue) {
       this.setState({inputValue: newProps.defaultValue});
     }

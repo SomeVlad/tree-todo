@@ -1,6 +1,13 @@
-  import React from 'react';
-import {Form, FormControl, Button} from 'react-bootstrap';
+import React from 'react';
+import {Form, FormControl, Button, ListGroup, Col} from 'react-bootstrap';
 import Category from './Category';
+
+const style = {
+  ListGroup: {
+    margin: '0',
+    lineHeight: "22px",
+  }
+};
 
 class CategoryList extends React.Component {
   constructor(props) {
@@ -32,16 +39,16 @@ class CategoryList extends React.Component {
             handleDeleteCategory={this.handleDeleteCategory}
             addSubcategory={this.props.addSubcategory}
             editCategory={this.props.editCategory}
+            setActiveCategory={this.props.setActiveCategory}
+            active={this.props.activeCategory === category.id}
           >
             {category.children.length ? this.renderCategories(category.children, categories) : null}
           </Category>
         );
       }
     });
-    return <ul>{categoriesToRender}</ul>;
+    return <ListGroup style={style.ListGroup}>{categoriesToRender}</ListGroup>;
   };
-
-
 
   handleDeleteCategory = id => {
     const { categories,  deleteCategories} = this.props;
@@ -70,7 +77,7 @@ class CategoryList extends React.Component {
             Add category
           </Button>
         </Form>
-        {categories.length ? this.renderCategories(rootCategoriesIds, categories) : null}
+        <Col md={6}>{categories.length ? this.renderCategories(rootCategoriesIds, categories) : null}</Col>
       </div>
     )
   }

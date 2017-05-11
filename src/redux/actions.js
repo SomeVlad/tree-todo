@@ -6,6 +6,8 @@ export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const EDIT_CATEGORY = 'EDIT_CATEGORY';
 export const SAVE_CATEGORY = 'SAVE_CATEGORY';
 export const DELETE_CATEGORY = 'DELETE_CATEGORY';
+export const SET_ACTIVE_CATEGORY = 'SET_ACTIVE_CATEGORY';
+
 
 export function addCategory(name, parentId) {
   return {
@@ -58,3 +60,11 @@ export function deleteCategories(categories) {
     payload: categories,
   }
 }
+
+export function setActiveCategory(id) {
+  return {
+    type: SET_ACTIVE_CATEGORY,
+    payload: id,
+  }
+}
+
