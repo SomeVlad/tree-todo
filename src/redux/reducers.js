@@ -9,6 +9,7 @@ import {
   DELETE_CATEGORY,
   SET_ACTIVE_CATEGORY,
   ADD_TODO,
+  DELETE_TODOS,
 } from './actions';
 
 const initialCategories = [
@@ -116,10 +117,12 @@ const toDos = (state = [], action) => {
         ...state,
         action.payload,
       ];
+    case DELETE_TODOS:
+      return state.filter(toDo => action.payload.indexOf(toDo.id) === -1);
     default:
       return state;
   }
-}
+};
 
 const rootReducer = combineReducers({toDos,categories, modal, activeCategory});
 

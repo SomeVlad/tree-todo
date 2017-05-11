@@ -30,6 +30,31 @@ class CategoryList extends React.Component {
     this.setState({input: ''});
   };
 
+  handleDeleteCategory = id => {
+    const { categories,  deleteCategories, toDos, deleteToDos} = this.props;
+
+    const findChildren = (id, categories) => {
+      const listToDelete = [];
+      const lookForChildren = id => {
+        listToDelete.push(id);
+        const children = categories.find(category => category.id === id).children;
+        children.forEach(child => lookForChildren(child))
+      };
+      lookForChildren(id);
+      return listToDelete;
+    };
+
+    const findToDos = (categoriesToDelete, toDos) => {
+      return toDos.filter(toDo => categoriesToDelete.indexOf(toDo.categoryId) !== -1).map(toDo => toDo.id)
+    };
+
+    const categoriesToDelete = findChildren(id, categories);
+    const toDosToDelete = findToDos(categoriesToDelete, toDos);
+
+    deleteCategories(categoriesToDelete);
+    deleteToDos(toDosToDelete);
+  };
+
   renderCategories = (idsToRender, categories) => {
     const categoriesToRender = [];
     categories.forEach(category => {
@@ -50,18 +75,6 @@ class CategoryList extends React.Component {
       }
     });
     return <ul style={style.ListGroup}>{categoriesToRender}</ul>;
-  };
-
-  handleDeleteCategory = id => {
-    const { categories,  deleteCategories} = this.props;
-    const findChildren = (id, categories) => {
-      const children = categories.find(category => category.id === id).children;
-      if(!children.length) {
-        return id;
-      }
-      return [id].concat(children.map(child => findChildren(child, categories)));
-    };
-    deleteCategories(findChildren(id, categories));
   };
 
   render(){

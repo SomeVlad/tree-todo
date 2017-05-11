@@ -8,6 +8,8 @@ export const SAVE_CATEGORY = 'SAVE_CATEGORY';
 export const DELETE_CATEGORY = 'DELETE_CATEGORY';
 export const SET_ACTIVE_CATEGORY = 'SET_ACTIVE_CATEGORY';
 export const ADD_TODO = 'ADD_TODO';
+export const DELETE_TODOS = 'DELETE_TODOS';
+
 
 
 export function addCategory(name, parentId) {
@@ -74,7 +76,15 @@ export function addToDo(categoryId, text) {
     type: ADD_TODO,
     payload: {
       categoryId,
-      text
+      text,
+      id: shortid.generate(),
     },
+  }
+}
+
+export function deleteToDos(toDos) {
+  return {
+    type: DELETE_TODOS,
+    payload: toDos,
   }
 }
