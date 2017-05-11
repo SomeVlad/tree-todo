@@ -1,5 +1,6 @@
 import React from 'react';
 import {Button, ButtonToolbar, ListGroupItem} from 'react-bootstrap';
+import classNames from 'classnames';
 import '../App.css';
 
 class Category extends React.Component {
@@ -9,6 +10,8 @@ class Category extends React.Component {
       hover: false,
     }
   }
+
+  //TODO перенести всю логику в контейнер
 
   handleMouseOver = e => {
     e.stopPropagation();
@@ -25,22 +28,39 @@ class Category extends React.Component {
     this.props.setActiveCategory(id);
   };
 
+  handleClickAdd = e => {
+    e.stopPropagation();
+    const {category: {id}, addSubcategory} = this.props;
+    addSubcategory(id);
+  };
+
+  handleClickDelete = e => {
+    e.stopPropagation();
+    const {category: {id}, deleteCategory} = this.props;
+    deleteCategory(id);
+  };
+
   render() {
     const {
       category: {id, name},
-      addSubcategory,
       editCategory,
-      handleDeleteCategory,
       active
     } = this.props;
 
+    const liClass = classNames(
+      'category',
+      {
+        active: active,
+        hover: this.state.hover,
+      },
+    );
+
     return (
-      <ListGroupItem
-        className={this.state.hover ? 'category hover' : 'category'}
+      <li
+        className={liClass}
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
         onClick={this.handleCategoryClick}
-        active={active}
       >
         {name}
         <ButtonToolbar className="pull-right">
@@ -49,17 +69,13 @@ class Category extends React.Component {
           }}>
             <span className="glyphicon glyphicon-pencil" aria-hidden="true"/>
           </Button>
-          <Button bsSize="xsmall" onClick={() => {
-            addSubcategory(id)
-          }}>
+          <Button bsSize="xsmall" onClick={this.handleClickAdd}>
             <span className="glyphicon glyphicon-plus" aria-hidden="true"/>
           </Button>
           <Button
             bsStyle="danger"
             bsSize="xsmall"
-            onClick={() => {
-              handleDeleteCategory(id)
-            }}
+            onClick={this.handleClickDelete}
           >
             <span className="glyphicon glyphicon-trash" aria-hidden="true"/>
           </Button>
@@ -67,7 +83,7 @@ class Category extends React.Component {
 
         {this.props.children}
 
-      </ListGroupItem>
+      </li>
     )
   }
 }

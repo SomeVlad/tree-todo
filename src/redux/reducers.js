@@ -8,6 +8,7 @@ import {
   SAVE_CATEGORY,
   DELETE_CATEGORY,
   SET_ACTIVE_CATEGORY,
+  ADD_TODO,
 } from './actions';
 
 const initialCategories = [
@@ -108,6 +109,18 @@ const activeCategory = (state = null, action) => {
   }
 };
 
-const rootReducer = combineReducers({categories, modal, activeCategory});
+const toDos = (state = [], action) => {
+  switch (action.type) {
+    case ADD_TODO:
+      return [
+        ...state,
+        action.payload,
+      ];
+    default:
+      return state;
+  }
+}
+
+const rootReducer = combineReducers({toDos,categories, modal, activeCategory});
 
 export default rootReducer;
