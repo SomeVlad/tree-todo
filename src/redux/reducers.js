@@ -10,6 +10,7 @@ import {
   SET_ACTIVE_CATEGORY,
   ADD_TODO,
   DELETE_TODOS,
+  TOGGLE_TODO,
 } from './actions';
 
 const initialCategories = [
@@ -119,6 +120,16 @@ const toDos = (state = [], action) => {
       ];
     case DELETE_TODOS:
       return state.filter(toDo => action.payload.indexOf(toDo.id) === -1);
+    case TOGGLE_TODO:
+      return state.map(todo => {
+        if(todo.id === action.payload) {
+          return {
+            ...todo,
+            completed: !todo.completed,
+          }
+        }
+        return todo;
+      });
     default:
       return state;
   }

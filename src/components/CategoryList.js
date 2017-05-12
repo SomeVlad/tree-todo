@@ -78,7 +78,7 @@ class CategoryList extends React.Component {
       <div>
         <Row>
           <Col md={12}>
-            <Form inline onSubmit={this.handleSubmit}>
+            <Form className="addForm" inline onSubmit={this.handleSubmit}>
               <FormControl
                 type="text"
                 placeholder="Enter text"
@@ -91,7 +91,7 @@ class CategoryList extends React.Component {
           </Col>
         </Row>
         <Row>
-          <Col md={9}>
+          <Col className="categoriesWrapper" md={12}>
             {categories.length ? this.renderCategories(rootCategoriesIds, categories) : null}
           </Col>
         </Row>

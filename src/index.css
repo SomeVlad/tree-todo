@@ -11,3 +11,7 @@ ul {
 li {
   list-style-type: none;
 }
+
+input[type=checkbox] {
+  transform: scale(1.5)
+}

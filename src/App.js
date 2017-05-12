@@ -12,10 +12,10 @@ class App extends Component {
       <Grid>
         {/*<FilterContainer />*/}
         {/*<StatusBarContainer />*/}
-        <Col md={6}>
+        <Col md={4}>
           <CategoryListContainer />
         </Col>
-        <Col md={6}>
+        <Col md={8}>
           <ToDoListContainer />
         </Col>
         <ModalContainer />

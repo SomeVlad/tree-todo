@@ -3,6 +3,7 @@
     color: black;
     padding: 5px 5px 5px 10px;
     border-radius: 3px;
+    border: 1px solid #ccc;
 }
 
 .category.hover {
@@ -15,9 +16,29 @@
 .category.active {
     background-color: #337ab7;
     color: #fff;
+    border-color: #337ab7;
 }
 
 .listGroup {
     margin: 0 0 0 20px;
     line-height: 22px;
+}
+
+.addForm {
+    margin-bottom: 20px;
+}
+
+.categoriesWrapper {
+    margin-left: -20px;
+}
+
+.todo {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 20px;
+}
+
+.todoTitle {
+    margin-left: 20px;
+    font-size: 20px;
 }
