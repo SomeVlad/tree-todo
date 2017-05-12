@@ -13,5 +13,6 @@ li {
 }
 
 input[type=checkbox] {
-  transform: scale(1.5)
+  transform: scale(1.5);
+  margin-left: 3px;
 }

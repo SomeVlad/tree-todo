@@ -10,7 +10,7 @@ export const SET_ACTIVE_CATEGORY = 'SET_ACTIVE_CATEGORY';
 export const ADD_TODO = 'ADD_TODO';
 export const DELETE_TODOS = 'DELETE_TODOS';
 export const TOGGLE_TODO = "TOGGLE_TODO";
-
+export const EDIT_TODO = "EDIT_TODO";
 
 export function addCategory(name, parentId) {
   return {
@@ -79,6 +79,7 @@ export function addToDo(categoryId, text) {
       text,
       id: shortid.generate(),
       completed: false,
+      description: '',
     },
   }
 }
@@ -93,6 +94,13 @@ export function deleteToDos(toDos) {
 export function toggleToDo(id) {
   return {
     type: TOGGLE_TODO,
+    payload: id,
+  }
+}
+
+export function editToDo(id) {
+  return {
+    type: EDIT_TODO,
     payload: id,
   }
 }

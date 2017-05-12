@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import shortid from 'shortid';
 import {
   ADD_CATEGORY,
   ADD_SUBCATEGORY,
@@ -11,18 +10,19 @@ import {
   ADD_TODO,
   DELETE_TODOS,
   TOGGLE_TODO,
+  EDIT_TODO,
 } from './actions';
 
 const initialCategories = [
   {
     name: 'category1',
-    id: shortid.generate(),
+    id: 1,
     parentId: null,
     children: [],
   },
   {
     name: 'category2',
-    id: shortid.generate(),
+    id: 2,
     parentId: null,
     children: [],
   }
@@ -35,6 +35,20 @@ const initialModal = {
   id: null,
   defaultValue: null,
 };
+
+const initialEditTodo = {
+  isEditMode: false,
+  id: null,
+};
+const initialToDos = [
+  {
+    categoryId: 1,
+    text: 'buy some milk',
+    id: 1,
+    completed: false,
+    description: '',
+  }
+];
 
 const categories = (state = initialCategories, action) => {
   switch (action.type) {
@@ -111,7 +125,7 @@ const activeCategory = (state = null, action) => {
   }
 };
 
-const toDos = (state = [], action) => {
+const toDos = (state = initialToDos, action) => {
   switch (action.type) {
     case ADD_TODO:
       return [
@@ -135,6 +149,20 @@ const toDos = (state = [], action) => {
   }
 };
 
-const rootReducer = combineReducers({toDos,categories, modal, activeCategory});
+const editToDo = (state = initialEditTodo, action) => {
+  switch (action.type) {
+    case EDIT_TODO: {
+      return {
+        ...state,
+        isEditMode: true,
+        id: action.payload,
+      }
+    }
+    default:
+      return state;
+  }
+};
+
+const rootReducer = combineReducers({toDos,categories, modal, activeCategory, editToDo});
 
 export default rootReducer;

@@ -25,7 +25,7 @@ const mapDispatchToProps = (dispatch) => {
     editCategory: (id, currentName) => dispatch(editCategory(id, currentName)),
     deleteCategories: categories => dispatch(deleteCategories(categories)),
     setActiveCategory: id => dispatch(setActiveCategory(id)),
-    deleteToDos: toDos => {dispatch(deleteToDos(toDos))},
+    deleteToDos: toDos => dispatch(deleteToDos(toDos)),
   }
 };
 

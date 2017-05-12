@@ -1,4 +1,5 @@
 import React from 'react';
+import {Button, ButtonToolbar} from 'react-bootstrap';
 
 const ToDo = (props) => {
   const {
@@ -10,8 +11,14 @@ const ToDo = (props) => {
       <input
         type="checkbox"
         checked={completed}
-        onChange={() => { toggleToDo(id)}} />
+        onChange={() => toggleToDo(id)}
+      />
       <span className="todoTitle">{text}</span>
+      <ButtonToolbar className="pull-right">
+        <Button bsSize="xsmall" onClick={() => console.log(id)}>
+          <span className="glyphicon glyphicon-pencil" aria-hidden="true"/>
+        </Button>
+      </ButtonToolbar>
     </li>
   )
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, ButtonToolbar, ListGroupItem} from 'react-bootstrap';
+import {Button, ButtonToolbar} from 'react-bootstrap';
 import classNames from 'classnames';
 import '../App.css';
 
@@ -65,9 +65,7 @@ class Category extends React.Component {
         >
           <span>{name}</span>
           <ButtonToolbar className="pull-right">
-            <Button bsSize="xsmall" onClick={() => {
-              editCategory(id, name)
-            }}>
+            <Button bsSize="xsmall" onClick={() => editCategory(id, name)}>
               <span className="glyphicon glyphicon-pencil" aria-hidden="true"/>
             </Button>
             <Button bsSize="xsmall" onClick={this.handleClickAdd}>
