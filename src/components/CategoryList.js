@@ -1,13 +1,7 @@
 import React from 'react';
-import {Form, FormControl, Button, ListGroup, Col} from 'react-bootstrap';
+import {Form, FormControl, Button, Row, Col} from 'react-bootstrap';
 import Category from './Category';
 
-const style = {
-  ListGroup: {
-    margin: '0',
-    lineHeight: "22px",
-  }
-};
 
 class CategoryList extends React.Component {
   constructor(props) {
@@ -74,7 +68,7 @@ class CategoryList extends React.Component {
         );
       }
     });
-    return <ul style={style.ListGroup}>{categoriesToRender}</ul>;
+    return <ul className="listGroup">{categoriesToRender}</ul>;
   };
 
   render(){
@@ -82,17 +76,25 @@ class CategoryList extends React.Component {
     const rootCategoriesIds = categories.filter(category => category.parentId === null).map(category => category.id);
     return (
       <div>
-        <Form inline onSubmit={this.handleSubmit}>
-          <FormControl
-            type="text"
-            placeholder="Enter text"
-            value={this.state.input}
-            onChange={this.handleInputChange}/>
-          <Button type="submit">
-            Add category
-          </Button>
-        </Form>
-        <Col md={6}>{categories.length ? this.renderCategories(rootCategoriesIds, categories) : null}</Col>
+        <Row>
+          <Col md={12}>
+            <Form inline onSubmit={this.handleSubmit}>
+              <FormControl
+                type="text"
+                placeholder="Enter text"
+                value={this.state.input}
+                onChange={this.handleInputChange}/>
+              <Button type="submit">
+                Add category
+              </Button>
+            </Form>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={9}>
+            {categories.length ? this.renderCategories(rootCategoriesIds, categories) : null}
+          </Col>
+        </Row>
       </div>
     )
   }

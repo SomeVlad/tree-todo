@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Col} from 'react-bootstrap';
+import {Col, Grid} from 'react-bootstrap';
 // import FilterContainer from './FilterContainer';
 // import StatusBarContainer from './StatusBarContainer';
 import CategoryListContainer from './components/CategoryListContainer';
@@ -9,7 +9,7 @@ import ModalContainer from './components/ModalContainer';
 class App extends Component {
   render() {
     return (
-      <div>
+      <Grid>
         {/*<FilterContainer />*/}
         {/*<StatusBarContainer />*/}
         <Col md={6}>
@@ -19,7 +19,7 @@ class App extends Component {
           <ToDoListContainer />
         </Col>
         <ModalContainer />
-      </div>
+      </Grid>
     );
   }
 }

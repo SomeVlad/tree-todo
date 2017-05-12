@@ -47,7 +47,7 @@ class Category extends React.Component {
       active
     } = this.props;
 
-    const liClass = classNames(
+    const categoryClass = classNames(
       'category',
       {
         active: active,
@@ -56,33 +56,33 @@ class Category extends React.Component {
     );
 
     return (
-      <li
-        className={liClass}
-        onMouseOver={this.handleMouseOver}
-        onMouseOut={this.handleMouseOut}
-        onClick={this.handleCategoryClick}
-      >
-        {name}
-        <ButtonToolbar className="pull-right">
-          <Button bsSize="xsmall" onClick={() => {
-            editCategory(id, name)
-          }}>
-            <span className="glyphicon glyphicon-pencil" aria-hidden="true"/>
-          </Button>
-          <Button bsSize="xsmall" onClick={this.handleClickAdd}>
-            <span className="glyphicon glyphicon-plus" aria-hidden="true"/>
-          </Button>
-          <Button
-            bsStyle="danger"
-            bsSize="xsmall"
-            onClick={this.handleClickDelete}
-          >
-            <span className="glyphicon glyphicon-trash" aria-hidden="true"/>
-          </Button>
-        </ButtonToolbar>
-
+      <li>
+        <div
+          className={categoryClass}
+          onMouseOver={this.handleMouseOver}
+          onMouseOut={this.handleMouseOut}
+          onClick={this.handleCategoryClick}
+        >
+          <span>{name}</span>
+          <ButtonToolbar className="pull-right">
+            <Button bsSize="xsmall" onClick={() => {
+              editCategory(id, name)
+            }}>
+              <span className="glyphicon glyphicon-pencil" aria-hidden="true"/>
+            </Button>
+            <Button bsSize="xsmall" onClick={this.handleClickAdd}>
+              <span className="glyphicon glyphicon-plus" aria-hidden="true"/>
+            </Button>
+            <Button
+              bsStyle="danger"
+              bsSize="xsmall"
+              onClick={this.handleClickDelete}
+            >
+              <span className="glyphicon glyphicon-trash" aria-hidden="true"/>
+            </Button>
+          </ButtonToolbar>
+        </div>
         {this.props.children}
-
       </li>
     )
   }

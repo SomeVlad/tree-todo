@@ -2,5 +2,12 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+}
+
+ul {
+  padding-left: 0;
+}
+
+li {
   list-style-type: none;
 }
