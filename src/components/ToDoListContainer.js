@@ -6,6 +6,7 @@ import ToDoList from './ToDoList';
 const mapStateToProps = (state) => {
   return {
     toDos: state.toDos.filter(toDo => toDo.categoryId === state.activeCategory),
+    activeCategory: state.activeCategory,
   }
 };
 

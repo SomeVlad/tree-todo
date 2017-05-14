@@ -1,7 +1,6 @@
 import React from 'react';
 import {Form, FormControl, Button, Row, Col} from 'react-bootstrap';
 import ToDo from './ToDo';
-import ToDoEdit from './ToDoEdit';
 
 class ToDoList extends React.Component {
   constructor(props) {
@@ -24,7 +23,7 @@ class ToDoList extends React.Component {
   };
 
   render() {
-    const {toDos, toggleToDo} = this.props;
+    const {toDos, toggleToDo, editToDo, activeCategory} = this.props;
     return (
       <div>
         <Row>
@@ -36,7 +35,7 @@ class ToDoList extends React.Component {
                 value={this.state.input}
                 onChange={this.handleInputChange}
               />
-              <Button type="submit" disabled={!this.props.activeCategory}>
+              <Button type="submit" disabled={!activeCategory}>
                 Add ToDo
               </Button>
             </Form>
@@ -46,13 +45,10 @@ class ToDoList extends React.Component {
           <Col md={12}>
             <ul>
               {toDos.map(toDo => (
-                <ToDo key={toDo.id} toDo={toDo} toggleToDo={toggleToDo} />
+                <ToDo key={toDo.id} toDo={toDo} toggleToDo={toggleToDo} editToDo={editToDo}/>
               ))}
             </ul>
           </Col>
-        </Row>
-        <Row>
-          <ToDoEdit />
         </Row>
       </div>
     )

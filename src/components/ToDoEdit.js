@@ -8,6 +8,7 @@ class ToDoEdit extends React.Component {
   }
 
   render() {
+    const {text, completed, description, cancelEditToDo} = this.props;
     return (
       <div>
         <Col md={12}>
@@ -15,8 +16,8 @@ class ToDoEdit extends React.Component {
             <Button>
               Save changes
             </Button>
-            <Button>
-              Reset
+            <Button onClick={cancelEditToDo}>
+              Cancel
             </Button>
           </ButtonToolbar>
         </Col>
@@ -24,7 +25,7 @@ class ToDoEdit extends React.Component {
           <Form className="addForm" inline>
             <FormControl
               type="text"
-              value={''}
+              value={text}
             />
           </Form>
         </Col>
@@ -32,14 +33,13 @@ class ToDoEdit extends React.Component {
           <label>
             <input
               type="checkbox"
-              checked={false}
+              checked={completed}
               style={{marginBottom: "20px"}}
-            />
-            {" "}Done
+            />{" "}Done
           </label>
         </Col>
         <Col md={12}>
-          <FormControl rows={10} componentClass="textarea" placeholder="textarea" />
+          <FormControl value={description} rows={10} componentClass="textarea" placeholder="textarea" />
         </Col>
       </div>
     )

@@ -11,6 +11,7 @@ export const ADD_TODO = 'ADD_TODO';
 export const DELETE_TODOS = 'DELETE_TODOS';
 export const TOGGLE_TODO = "TOGGLE_TODO";
 export const EDIT_TODO = "EDIT_TODO";
+export const CANCEL_EDIT_TODO = "CANCEL_EDIT_TODO";
 
 export function addCategory(name, parentId) {
   return {
@@ -102,5 +103,11 @@ export function editToDo(id) {
   return {
     type: EDIT_TODO,
     payload: id,
+  }
+}
+
+export function cancelEditToDo() {
+  return {
+    type: CANCEL_EDIT_TODO,
   }
 }

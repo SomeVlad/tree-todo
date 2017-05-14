@@ -5,6 +5,7 @@ const ToDo = (props) => {
   const {
     toDo: { id, completed, text},
     toggleToDo,
+    editToDo,
   } = props;
   return (
     <li className="todo">
@@ -15,7 +16,7 @@ const ToDo = (props) => {
       />
       <span className="todoTitle">{text}</span>
       <ButtonToolbar className="pull-right">
-        <Button bsSize="xsmall" onClick={() => console.log(id)}>
+        <Button bsSize="xsmall" onClick={() => editToDo(id)}>
           <span className="glyphicon glyphicon-pencil" aria-hidden="true"/>
         </Button>
       </ButtonToolbar>
