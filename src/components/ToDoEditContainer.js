@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {cancelEditToDo} from '../redux/actions';
+import {cancelEditToDo, saveEditToDo} from '../redux/actions';
 import ToDoEdit from './ToDoEdit';
 
 const mapStateToProps = state => {
@@ -15,6 +15,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
   	cancelEditToDo: () => dispatch(cancelEditToDo()),
+  	saveEditToDo: toDo => dispatch(saveEditToDo(toDo))
   }
 };
 

@@ -4,7 +4,7 @@ export const ADD_CATEGORY = 'ADD_CATEGORY';
 export const ADD_SUBCATEGORY = 'ADD_SUBCATEGORY';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const EDIT_CATEGORY = 'EDIT_CATEGORY';
-export const SAVE_CATEGORY = 'SAVE_CATEGORY';
+export const SAVE_EDIT_CATEGORY = 'SAVE_EDIT_CATEGORY';
 export const DELETE_CATEGORY = 'DELETE_CATEGORY';
 export const SET_ACTIVE_CATEGORY = 'SET_ACTIVE_CATEGORY';
 export const ADD_TODO = 'ADD_TODO';
@@ -12,6 +12,7 @@ export const DELETE_TODOS = 'DELETE_TODOS';
 export const TOGGLE_TODO = "TOGGLE_TODO";
 export const EDIT_TODO = "EDIT_TODO";
 export const CANCEL_EDIT_TODO = "CANCEL_EDIT_TODO";
+export const SAVE_EDIT_TODO = "SAVE_EDIT_TODO";
 
 export function addCategory(name, parentId) {
   return {
@@ -50,7 +51,7 @@ export function editCategory(id, currentName) {
 
 export function saveCategory(id, name) {
   return {
-    type: SAVE_CATEGORY,
+    type: SAVE_EDIT_CATEGORY,
     payload: {
       id,
       name,
@@ -111,3 +112,11 @@ export function cancelEditToDo() {
     type: CANCEL_EDIT_TODO,
   }
 }
+
+export function saveEditToDo(todo) {
+  return {
+    type: SAVE_EDIT_TODO,
+    payload: todo,
+  }
+}
+

@@ -83,7 +83,8 @@ class CategoryList extends React.Component {
                 type="text"
                 placeholder="Enter text"
                 value={this.state.input}
-                onChange={this.handleInputChange}/>
+                onChange={this.handleInputChange}
+              />
               <Button type="submit">
                 Add category
               </Button>

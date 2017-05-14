@@ -4,7 +4,7 @@ import {
   ADD_SUBCATEGORY,
   CLOSE_MODAL,
   EDIT_CATEGORY,
-  SAVE_CATEGORY,
+  SAVE_EDIT_CATEGORY,
   DELETE_CATEGORY,
   SET_ACTIVE_CATEGORY,
   ADD_TODO,
@@ -12,6 +12,7 @@ import {
   TOGGLE_TODO,
   EDIT_TODO,
   CANCEL_EDIT_TODO,
+  SAVE_EDIT_TODO,
 } from './actions';
 
 const initialCategories = [
@@ -66,7 +67,7 @@ const categories = (state = initialCategories, action) => {
         return category
       });
       return [newCategory, ...newState];
-    case SAVE_CATEGORY:
+    case SAVE_EDIT_CATEGORY:
       return state.map(category => {
         if(category.id === action.payload.id) {
           return {
@@ -142,6 +143,19 @@ const toDos = (state = initialToDos, action) => {
         }
         return todo;
       });
+    case SAVE_EDIT_TODO:
+      const newTodo = action.payload;
+      return state.map(todo => {
+        if(todo.id === newTodo.id) {
+          return {
+            ...todo,
+            text: newTodo.text,
+            completed: newTodo.completed,
+            description: newTodo.description,
+          }
+        }
+        return todo;
+      });
     default:
       return state;
   }
@@ -156,6 +170,12 @@ const editToDo = (state = initialEditTodo, action) => {
         id: action.payload,
       }
     case CANCEL_EDIT_TODO:
+      return {
+        ...state,
+        show: false,
+        id: null,
+      }
+    case SAVE_EDIT_TODO:
       return {
         ...state,
         show: false,
