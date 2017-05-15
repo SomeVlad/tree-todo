@@ -17,14 +17,21 @@ export const TOGGLE_COLLAPSE_CATEGORY = 'TOGGLE_COLLAPSE_CATEGORY';
 export const MOVE_TODO = 'MOVE_TODO';
 
 export function addCategory(name, parentId) {
-  return {
-    type: ADD_CATEGORY,
-    payload: {
-      name,
-      id: shortid.generate(),
-      parentId: parentId || null,
-      children: [],
-      collapsed: false,
+  return(dispatch, getState) => {
+    dispatch({
+      type: ADD_CATEGORY,
+      payload: {
+        name,
+        id: shortid.generate(),
+        parentId: parentId || null,
+        children: [],
+        collapsed: false,
+      }
+    });
+    dispatch(setActiveCategory(parentId));
+    const parentCategory = getState().categories.find(category => category.id === parentId);
+    if(!parentCategory.collapsed){
+      dispatch(toggleCollapseCategory(parentId))
     }
   }
 }
