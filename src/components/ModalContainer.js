@@ -1,7 +1,7 @@
 import {Modal, Button, FormGroup, FormControl} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import React from 'react';
-import {closeModal, addCategory, saveCategory, setActiveCategory, toggleCollapseCategory} from '../redux/actions';
+import {closeModal, addSubCategory, saveCategory, setActiveCategory, toggleCollapseCategory} from '../redux/actions';
 
 
 class ModalComponent extends React.Component {
@@ -108,7 +108,7 @@ const mapDispatchToProps = (dispatch) => {
     saveCategory: (id, name) => dispatch(saveCategory(id, name)),
     setActiveCategory: id => dispatch(setActiveCategory(id)),
     toggleCollapseCategory: id => dispatch(toggleCollapseCategory(id)),
-    addSubCategory: (name, parentId) => dispatch(addCategory(name, parentId)),
+    addSubCategory: (name, parentId) => dispatch(addSubCategory(name, parentId)),
   }
 };
 

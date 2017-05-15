@@ -16,22 +16,25 @@ export const SAVE_EDIT_TODO = 'SAVE_EDIT_TODO';
 export const TOGGLE_COLLAPSE_CATEGORY = 'TOGGLE_COLLAPSE_CATEGORY';
 export const MOVE_TODO = 'MOVE_TODO';
 
-export function addCategory(name, parentId) {
+export function addSubCategory(name, parentId) {
   return(dispatch, getState) => {
-    dispatch({
-      type: ADD_CATEGORY,
-      payload: {
-        name,
-        id: shortid.generate(),
-        parentId: parentId || null,
-        children: [],
-        collapsed: false,
-      }
-    });
-    dispatch(setActiveCategory(parentId));
     const parentCategory = getState().categories.find(category => category.id === parentId);
+    dispatch(addCategory(name, parentId));
     if(!parentCategory.collapsed){
       dispatch(toggleCollapseCategory(parentId))
+    }
+  }
+}
+
+export function addCategory(name, parentId) {
+  return {
+    type: ADD_CATEGORY,
+    payload: {
+      name,
+      id: shortid.generate(),
+      parentId: parentId || null,
+      children: [],
+      collapsed: false,
     }
   }
 }

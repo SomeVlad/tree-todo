@@ -62,9 +62,8 @@ class Category extends React.Component {
 
   render() {
     const {
-      category: {id, name, children, collapsed},
+      category: {name, children, collapsed},
       active,
-      deleteCategory,
       editTodo,
     } = this.props;
 
