@@ -9,10 +9,11 @@ export const DELETE_CATEGORY = 'DELETE_CATEGORY';
 export const SET_ACTIVE_CATEGORY = 'SET_ACTIVE_CATEGORY';
 export const ADD_TODO = 'ADD_TODO';
 export const DELETE_TODOS = 'DELETE_TODOS';
-export const TOGGLE_TODO = "TOGGLE_TODO";
+export const TOGGLE_TODO = 'TOGGLE_TODO';
 export const EDIT_TODO = "EDIT_TODO";
-export const CANCEL_EDIT_TODO = "CANCEL_EDIT_TODO";
-export const SAVE_EDIT_TODO = "SAVE_EDIT_TODO";
+export const CANCEL_EDIT_TODO = 'CANCEL_EDIT_TODO';
+export const SAVE_EDIT_TODO = 'SAVE_EDIT_TODO';
+export const TOGGLE_COLLAPSE_CATEGORY = 'TOGGLE_COLLAPSE_CATEGORY';
 
 export function addCategory(name, parentId) {
   return {
@@ -22,6 +23,7 @@ export function addCategory(name, parentId) {
       id: shortid.generate(),
       parentId: parentId || null,
       children: [],
+      collapsed: false,
     }
   }
 }
@@ -120,3 +122,9 @@ export function saveEditToDo(todo) {
   }
 }
 
+export function toggleCollapseCategory(id) {
+  return {
+    type: TOGGLE_COLLAPSE_CATEGORY,
+    id,
+  }
+}

@@ -21,20 +21,19 @@ class ToDoEdit extends React.Component {
       completed: '',
       description: '',
     })
-  }
+  };
 
   handleTextChange = e => {
-    console.log(123)
     this.setState({text: e.target.value})
-  }
+  };
 
   handleDescriptionChange = e => {
     this.setState({description: e.target.value})
-  }
+  };
 
   handleCompletedChange = e => {
     this.setState({completed: !this.state.completed})
-  }
+  };
 
   render() {
     const {cancelEditToDo} = this.props;

@@ -13,6 +13,7 @@ import {
   EDIT_TODO,
   CANCEL_EDIT_TODO,
   SAVE_EDIT_TODO,
+  TOGGLE_COLLAPSE_CATEGORY,
 } from './actions';
 
 const initialCategories = [
@@ -21,12 +22,14 @@ const initialCategories = [
     id: 1,
     parentId: null,
     children: [],
+    collapsed: false,
   },
   {
     name: 'category2',
     id: 2,
     parentId: null,
     children: [],
+    collapsed: false,
   }
 ];
 
@@ -35,7 +38,7 @@ const initialModal = {
   mode: null,
   parentId: null,
   id: null,
-  defaultValue: null,
+  defaultValue: "",
 };
 
 const initialEditTodo = {
@@ -63,8 +66,9 @@ const categories = (state = initialCategories, action) => {
             ...category,
             children: [...category.children, newCategory.id]
           }
+        } else {
+          return category
         }
-        return category
       });
       return [newCategory, ...newState];
     case SAVE_EDIT_CATEGORY:
@@ -74,11 +78,23 @@ const categories = (state = initialCategories, action) => {
             ...category,
             name: action.payload.name
           }
+        } else {
+          return category;
         }
-        return category;
       });
     case DELETE_CATEGORY:
       return state.filter(category => action.payload.indexOf(category.id) === -1);
+    case TOGGLE_COLLAPSE_CATEGORY:
+      return state.map(category => {
+        if(category.id === action.id) {
+          return {
+            ...category,
+            collapsed: !category.collapsed,
+          }
+        } else {
+          return category;
+        }
+      });
     default:
       return state;
   }
@@ -140,8 +156,9 @@ const toDos = (state = initialToDos, action) => {
             ...todo,
             completed: !todo.completed,
           }
+        } else {
+          return todo;
         }
-        return todo;
       });
     case SAVE_EDIT_TODO:
       const newTodo = action.payload;
@@ -153,8 +170,9 @@ const toDos = (state = initialToDos, action) => {
             completed: newTodo.completed,
             description: newTodo.description,
           }
+        } else {
+          return todo;
         }
-        return todo;
       });
     default:
       return state;

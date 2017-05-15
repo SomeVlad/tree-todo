@@ -15,8 +15,6 @@ class CategoryList extends React.Component {
     this.setState({input: e.target.value})
   };
 
-  //TODO перенести всю логику в контейнер
-
   handleSubmit = (e) => {
     e.preventDefault();
     const name = this.state.input;
@@ -24,6 +22,7 @@ class CategoryList extends React.Component {
     this.setState({input: ''});
   };
 
+  //TODO перенести всю логику в контейнер
   handleDeleteCategory = id => {
     const { categories,  deleteCategories, toDos, deleteToDos} = this.props;
 
@@ -61,9 +60,10 @@ class CategoryList extends React.Component {
             addSubcategory={this.props.addSubcategory}
             editCategory={this.props.editCategory}
             setActiveCategory={this.props.setActiveCategory}
+            toggleCollapseCategory={this.props.toggleCollapseCategory}
             active={this.props.activeCategory === category.id}
           >
-            {category.children.length ? this.renderCategories(category.children, categories) : null}
+            {category.children.length && category.collapsed ? this.renderCategories(category.children, categories) : null}
           </Category>
         );
       }
@@ -85,7 +85,8 @@ class CategoryList extends React.Component {
                 value={this.state.input}
                 onChange={this.handleInputChange}
               />
-              <Button type="submit">
+              {' '}
+              <Button bsStyle="primary" type="submit">
                 Add category
               </Button>
             </Form>
@@ -102,5 +103,3 @@ class CategoryList extends React.Component {
 }
 
 export default CategoryList;
-
-

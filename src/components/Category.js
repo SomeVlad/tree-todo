@@ -11,40 +11,27 @@ class Category extends React.Component {
     }
   }
 
-  //TODO перенести всю логику в контейнер
-
   handleMouseOver = e => {
     e.stopPropagation();
-    this.setState({hover: true})
+    if(e.target === e.currentTarget){
+      this.setState({hover: true})
+    }
   };
 
-  handleMouseOut = () => {
+  handleMouseOut = e => {
+    e.stopPropagation();
     this.setState({hover: false})
-  };
-
-  handleCategoryClick = e => {
-    e.stopPropagation();
-    const {category: {id}} = this.props;
-    this.props.setActiveCategory(id);
-  };
-
-  handleClickAdd = e => {
-    e.stopPropagation();
-    const {category: {id}, addSubcategory} = this.props;
-    addSubcategory(id);
-  };
-
-  handleClickDelete = e => {
-    e.stopPropagation();
-    const {category: {id}, deleteCategory} = this.props;
-    deleteCategory(id);
   };
 
   render() {
     const {
-      category: {id, name},
+      category: {id, name, children, collapsed},
       editCategory,
-      active
+      addSubcategory,
+      setActiveCategory,
+      deleteCategory,
+      toggleCollapseCategory,
+      active,
     } = this.props;
 
     const categoryClass = classNames(
@@ -55,27 +42,37 @@ class Category extends React.Component {
       },
     );
 
+
+    const categoryCollapseClass = classNames(
+      'glyphicon',
+      {
+        'glyphicon-triangle-right': !collapsed,
+        'glyphicon-triangle-bottom': collapsed,
+      },
+    );
+
     return (
       <li>
         <div
           className={categoryClass}
           onMouseOver={this.handleMouseOver}
           onMouseOut={this.handleMouseOut}
-          onClick={this.handleCategoryClick}
+          onClick={e => {setActiveCategory(e, id)}}
         >
-          <span>{name}</span>
+          {children.length > 0 &&
+            <Button className="category__triangle" bsSize="xsmall" >
+              <span onClick={e => {toggleCollapseCategory(e, id)}} className={categoryCollapseClass}/>
+            </Button>
+          }
+          <span className="category__title">{name}</span>
           <ButtonToolbar className="pull-right">
-            <Button bsSize="xsmall" onClick={() => editCategory(id, name)}>
+            <Button bsSize="xsmall" onClick={e => editCategory(e, id, name)}>
               <span className="glyphicon glyphicon-pencil" aria-hidden="true"/>
             </Button>
-            <Button bsSize="xsmall" onClick={this.handleClickAdd}>
+            <Button bsStyle="success" bsSize="xsmall" onClick={e => addSubcategory(e, id)}>
               <span className="glyphicon glyphicon-plus" aria-hidden="true"/>
             </Button>
-            <Button
-              bsStyle="danger"
-              bsSize="xsmall"
-              onClick={this.handleClickDelete}
-            >
+            <Button bsStyle="danger" bsSize="xsmall" onClick={() => {deleteCategory(id)}}>
               <span className="glyphicon glyphicon-trash" aria-hidden="true"/>
             </Button>
           </ButtonToolbar>

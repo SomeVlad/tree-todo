@@ -35,7 +35,8 @@ class ToDoList extends React.Component {
                 value={this.state.input}
                 onChange={this.handleInputChange}
               />
-              <Button type="submit" disabled={!activeCategory}>
+              {' '}
+              <Button bsStyle="primary" type="submit" disabled={!activeCategory}>
                 Add ToDo
               </Button>
             </Form>

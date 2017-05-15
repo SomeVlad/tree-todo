@@ -6,7 +6,8 @@ import {
   editCategory,
   deleteCategories,
   setActiveCategory,
-  deleteToDos
+  deleteToDos,
+  toggleCollapseCategory
 } from '../redux/actions';
 
 
@@ -18,14 +19,27 @@ const mapStateToProps = (state) => {
   }
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     addCategory: name => dispatch(addCategory(name)),
-    addSubcategory: parentId => dispatch(addSubcategory(parentId)),
-    editCategory: (id, currentName) => dispatch(editCategory(id, currentName)),
+    addSubcategory: (e, id) => {
+      e.stopPropagation();
+      dispatch(addSubcategory(id))
+    },
+    editCategory: (e, id, currentName) => {
+      e.stopPropagation();
+      dispatch(editCategory(id, currentName))
+    },
     deleteCategories: categories => dispatch(deleteCategories(categories)),
-    setActiveCategory: id => dispatch(setActiveCategory(id)),
+    setActiveCategory: (e, id) => {
+      e.stopPropagation();
+      dispatch(setActiveCategory(id))
+    },
     deleteToDos: toDos => dispatch(deleteToDos(toDos)),
+    toggleCollapseCategory: (e, id) => {
+      e.stopPropagation();
+      dispatch(toggleCollapseCategory(id))
+    }
   }
 };
 
