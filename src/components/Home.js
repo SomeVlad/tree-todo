@@ -3,12 +3,12 @@ import {Col, Grid} from 'react-bootstrap';
 import {connect} from 'react-redux';
 // import FilterContainer from './FilterContainer';
 // import StatusBarContainer from './StatusBarContainer';
-import CategoryListContainer from './components/CategoryListContainer';
-import TodoListContainer from './components/TodoListContainer';
-import ModalContainer from './components/ModalContainer';
-import TodoEditContainer from './components/TodoEditContainer';
+import CategoryListContainer from './CategoryListContainer';
+import TodoListContainer from './TodoListContainer';
+import ModalContainer from './ModalContainer';
+import TodoEditContainer from './TodoEditContainer';
 
-class App extends Component {
+class Home extends Component {
   render() {
     const {showEditTodo} = this.props;
     return (
@@ -37,4 +37,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(Home);
