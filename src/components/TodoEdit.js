@@ -1,7 +1,7 @@
 import React from 'react';
 import {ButtonToolbar, Button, Col, Form, FormControl} from 'react-bootstrap';
 
-class ToDoEdit extends React.Component {
+class TodoEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,9 +13,9 @@ class ToDoEdit extends React.Component {
 
   handleSave = e => {
     const {text, completed, description} = this.state;
-    const {id, saveEditToDo} = this.props;
+    const {id, saveEditTodo} = this.props;
     const todo = { id, text, completed, description };
-    saveEditToDo(todo);
+    saveEditTodo(todo);
     this.setState({
       text: '',
       completed: '',
@@ -36,7 +36,7 @@ class ToDoEdit extends React.Component {
   };
 
   render() {
-    const {cancelEditToDo} = this.props;
+    const {cancelEditTodo} = this.props;
     return (
       <div>
         <Col md={12}>
@@ -44,7 +44,7 @@ class ToDoEdit extends React.Component {
             <Button onClick={this.handleSave}>
               Save changes
             </Button>
-            <Button onClick={cancelEditToDo}>
+            <Button onClick={cancelEditTodo}>
               Cancel
             </Button>
           </ButtonToolbar>
@@ -65,7 +65,7 @@ class ToDoEdit extends React.Component {
               type="checkbox"
               checked={this.state.completed}
               style={{marginBottom: "20px"}}
-            />{" "}Done
+            />{" "}done
           </label>
         </Col>
         <Col md={12}>
@@ -82,4 +82,4 @@ class ToDoEdit extends React.Component {
   }
 }
 
-export default ToDoEdit;
+export default TodoEdit;

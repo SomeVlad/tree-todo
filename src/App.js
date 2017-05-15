@@ -4,13 +4,13 @@ import {connect} from 'react-redux';
 // import FilterContainer from './FilterContainer';
 // import StatusBarContainer from './StatusBarContainer';
 import CategoryListContainer from './components/CategoryListContainer';
-import ToDoListContainer from './components/ToDoListContainer';
+import TodoListContainer from './components/TodoListContainer';
 import ModalContainer from './components/ModalContainer';
-import ToDoEditContainer from './components/ToDoEditContainer';
+import TodoEditContainer from './components/TodoEditContainer';
 
 class App extends Component {
   render() {
-    const {showEditToDo} = this.props;
+    const {showEditTodo} = this.props;
     return (
       <Grid>
         {/*<FilterContainer />*/}
@@ -19,10 +19,10 @@ class App extends Component {
           <CategoryListContainer />
         </Col>
         <Col md={7}>
-          {!showEditToDo ? 
-            <ToDoListContainer />
+          {!showEditTodo ?
+            <TodoListContainer />
             :
-            <ToDoEditContainer />
+            <TodoEditContainer />
           }
         </Col>
         <ModalContainer />
@@ -33,7 +33,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    showEditToDo: state.editToDo.show,
+    showEditTodo: state.editTodo.show,
   }
 }
 

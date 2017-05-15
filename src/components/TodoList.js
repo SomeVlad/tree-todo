@@ -1,8 +1,8 @@
 import React from 'react';
 import {Form, FormControl, Button, Row, Col} from 'react-bootstrap';
-import ToDo from './ToDo';
+import Todo from './Todo';
 
-class ToDoList extends React.Component {
+class TodoList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,12 +18,12 @@ class ToDoList extends React.Component {
     e.preventDefault();
     const name = this.state.input;
     const categoryId = this.props.activeCategory;
-    this.props.addToDo(categoryId,name);
+    this.props.addTodo(categoryId,name);
     this.setState({input: ''});
   };
 
   render() {
-    const {toDos, toggleToDo, editToDo, activeCategory} = this.props;
+    const {todos, toggleTodo, editTodo, activeCategory} = this.props;
     return (
       <div>
         <Row>
@@ -37,7 +37,7 @@ class ToDoList extends React.Component {
               />
               {' '}
               <Button bsStyle="primary" type="submit" disabled={!activeCategory}>
-                Add ToDo
+                Add Todo
               </Button>
             </Form>
           </Col>
@@ -45,8 +45,8 @@ class ToDoList extends React.Component {
         <Row>
           <Col md={12}>
             <ul>
-              {toDos.map(toDo => (
-                <ToDo key={toDo.id} toDo={toDo} toggleToDo={toggleToDo} editToDo={editToDo}/>
+              {todos.map(todo => (
+                <Todo key={todo.id} todo={todo} toggleTodo={toggleTodo} editTodo={editTodo}/>
               ))}
             </ul>
           </Col>
@@ -56,4 +56,4 @@ class ToDoList extends React.Component {
   }
 }
 
-export default ToDoList;
+export default TodoList;

@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import {
   ADD_CATEGORY,
-  ADD_SUBCATEGORY,
+  OPEN_ADD_SUBCATEGORY_MODAL,
   CLOSE_MODAL,
-  EDIT_CATEGORY,
+  OPEN_EDIT_CATEGORY_MODAL,
   SAVE_EDIT_CATEGORY,
   DELETE_CATEGORY,
   SET_ACTIVE_CATEGORY,
@@ -14,6 +14,7 @@ import {
   CANCEL_EDIT_TODO,
   SAVE_EDIT_TODO,
   TOGGLE_COLLAPSE_CATEGORY,
+  MOVE_TODO,
 } from './actions';
 
 const initialCategories = [
@@ -37,8 +38,7 @@ const initialModal = {
   show: false,
   mode: null,
   parentId: null,
-  id: null,
-  defaultValue: "",
+  categoryId: null,
 };
 
 const initialEditTodo = {
@@ -46,7 +46,7 @@ const initialEditTodo = {
   id: null,
 };
 
-const initialToDos = [
+const initialTodos = [
   {
     categoryId: 1,
     text: 'buy some milk',
@@ -102,29 +102,27 @@ const categories = (state = initialCategories, action) => {
 
 const modal = (state = initialModal, action) => {
   switch (action.type) {
-    case ADD_SUBCATEGORY:
+    case OPEN_ADD_SUBCATEGORY_MODAL:
       return {
         ...state,
         show: true,
         mode: 'add',
-        parentId: action.payload,
+        parentId: action.parentId,
       };
     case CLOSE_MODAL:
       return {
         ...state,
         show: false,
         parentId: null,
+        categoryId: null,
         mode: null,
-        id: null,
-        defaultValue: null,
       };
-    case EDIT_CATEGORY:
+    case OPEN_EDIT_CATEGORY_MODAL:
       return {
         ...state,
         show: true,
         mode: 'edit',
-        id: action.payload.id,
-        defaultValue: action.payload.currentName,
+        categoryId: action.id,
       };
     default:
       return state;
@@ -140,7 +138,7 @@ const activeCategory = (state = null, action) => {
   }
 };
 
-const toDos = (state = initialToDos, action) => {
+const todos = (state = initialTodos, action) => {
   switch (action.type) {
     case ADD_TODO:
       return [
@@ -148,7 +146,7 @@ const toDos = (state = initialToDos, action) => {
         action.payload,
       ];
     case DELETE_TODOS:
-      return state.filter(toDo => action.payload.indexOf(toDo.id) === -1);
+      return state.filter(todo => action.payload.indexOf(todo.id) === -1);
     case TOGGLE_TODO:
       return state.map(todo => {
         if(todo.id === action.payload) {
@@ -174,36 +172,47 @@ const toDos = (state = initialToDos, action) => {
           return todo;
         }
       });
+    case MOVE_TODO:
+      return state.map(todo => {
+        if(todo.id === action.todoId) {
+          return {
+            ...todo,
+            categoryId: action.categoryId,
+          }
+        } else {
+          return todo;
+        }
+      });
     default:
       return state;
   }
 };
 
-const editToDo = (state = initialEditTodo, action) => {
+const editTodo = (state = initialEditTodo, action) => {
   switch (action.type) {
     case EDIT_TODO:
       return {
         ...state,
         show: true,
         id: action.payload,
-      }
+      };
     case CANCEL_EDIT_TODO:
       return {
         ...state,
         show: false,
         id: null,
-      }
+      };
     case SAVE_EDIT_TODO:
       return {
         ...state,
         show: false,
         id: null,
-      }
+      };
     default:
       return state;
   }
 };
 
-const rootReducer = combineReducers({toDos,categories, modal, activeCategory, editToDo});
+const rootReducer = combineReducers({todos,categories, modal, activeCategory, editTodo});
 
 export default rootReducer;

@@ -54,3 +54,7 @@
 .textArea {
     width: 100%;
 }
+
+.glyphicon_flip {
+    transform: scaleX(-1);
+}

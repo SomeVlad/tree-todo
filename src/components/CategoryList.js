@@ -15,7 +15,7 @@ class CategoryList extends React.Component {
     this.setState({input: e.target.value})
   };
 
-  handleSubmit = (e) => {
+  handleAddRootCategory = (e) => {
     e.preventDefault();
     const name = this.state.input;
     this.props.addCategory(name);
@@ -24,7 +24,7 @@ class CategoryList extends React.Component {
 
   //TODO перенести всю логику в контейнер
   handleDeleteCategory = id => {
-    const { categories,  deleteCategories, toDos, deleteToDos} = this.props;
+    const { categories,  deleteCategories, todos, deleteTodos} = this.props;
 
     const findChildren = (id, categories) => {
       const listToDelete = [];
@@ -37,15 +37,15 @@ class CategoryList extends React.Component {
       return listToDelete;
     };
 
-    const findToDos = (categoriesToDelete, toDos) => {
-      return toDos.filter(toDo => categoriesToDelete.indexOf(toDo.categoryId) !== -1).map(toDo => toDo.id)
+    const findTodos = (categoriesToDelete, todos) => {
+      return todos.filter(todo => categoriesToDelete.indexOf(todo.categoryId) !== -1).map(todo => todo.id)
     };
 
     const categoriesToDelete = findChildren(id, categories);
-    const toDosToDelete = findToDos(categoriesToDelete, toDos);
+    const todosToDelete = findTodos(categoriesToDelete, todos);
 
     deleteCategories(categoriesToDelete);
-    deleteToDos(toDosToDelete);
+    deleteTodos(todosToDelete);
   };
 
   renderCategories = (idsToRender, categories) => {
@@ -57,11 +57,13 @@ class CategoryList extends React.Component {
             key={category.id}
             category={category}
             deleteCategory={this.handleDeleteCategory}
-            addSubcategory={this.props.addSubcategory}
-            editCategory={this.props.editCategory}
+            openAddSubcategoryModal={this.props.openAddSubcategoryModal}
+            openEditCategoryModal={this.props.openEditCategoryModal}
             setActiveCategory={this.props.setActiveCategory}
             toggleCollapseCategory={this.props.toggleCollapseCategory}
             active={this.props.activeCategory === category.id}
+            editTodo={this.props.editTodo}
+            moveTodo={this.props.moveTodo}
           >
             {category.children.length && category.collapsed ? this.renderCategories(category.children, categories) : null}
           </Category>
@@ -78,7 +80,7 @@ class CategoryList extends React.Component {
       <div>
         <Row>
           <Col md={12}>
-            <Form className="addForm" inline onSubmit={this.handleSubmit}>
+            <Form className="addForm" inline onSubmit={this.handleAddRootCategory}>
               <FormControl
                 type="text"
                 placeholder="Enter text"

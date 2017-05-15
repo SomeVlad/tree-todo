@@ -1,9 +1,9 @@
 import shortid from 'shortid'
 
 export const ADD_CATEGORY = 'ADD_CATEGORY';
-export const ADD_SUBCATEGORY = 'ADD_SUBCATEGORY';
+export const OPEN_ADD_SUBCATEGORY_MODAL = 'OPEN_ADD_SUBCATEGORY_MODAL';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
-export const EDIT_CATEGORY = 'EDIT_CATEGORY';
+export const OPEN_EDIT_CATEGORY_MODAL = 'OPEN_EDIT_CATEGORY_MODAL';
 export const SAVE_EDIT_CATEGORY = 'SAVE_EDIT_CATEGORY';
 export const DELETE_CATEGORY = 'DELETE_CATEGORY';
 export const SET_ACTIVE_CATEGORY = 'SET_ACTIVE_CATEGORY';
@@ -14,6 +14,7 @@ export const EDIT_TODO = "EDIT_TODO";
 export const CANCEL_EDIT_TODO = 'CANCEL_EDIT_TODO';
 export const SAVE_EDIT_TODO = 'SAVE_EDIT_TODO';
 export const TOGGLE_COLLAPSE_CATEGORY = 'TOGGLE_COLLAPSE_CATEGORY';
+export const MOVE_TODO = 'MOVE_TODO';
 
 export function addCategory(name, parentId) {
   return {
@@ -28,10 +29,10 @@ export function addCategory(name, parentId) {
   }
 }
 
-export function addSubcategory(parentId) {
+export function openAddSubcategoryModal(parentId) {
   return {
-    type: ADD_SUBCATEGORY,
-    payload: parentId,
+    type: OPEN_ADD_SUBCATEGORY_MODAL,
+    parentId,
   }
 }
 
@@ -41,13 +42,10 @@ export function closeModal() {
   }
 }
 
-export function editCategory(id, currentName) {
+export function openEditCategoryModal(id) {
   return {
-    type: EDIT_CATEGORY,
-    payload: {
-      id,
-      currentName, 
-    },
+    type: OPEN_EDIT_CATEGORY_MODAL,
+    id,
   }
 }
 
@@ -75,7 +73,7 @@ export function setActiveCategory(id) {
   }
 }
 
-export function addToDo(categoryId, text) {
+export function addTodo(categoryId, text) {
   return {
     type: ADD_TODO,
     payload: {
@@ -88,34 +86,34 @@ export function addToDo(categoryId, text) {
   }
 }
 
-export function deleteToDos(toDos) {
+export function deleteTodos(todos) {
   return {
     type: DELETE_TODOS,
-    payload: toDos,
+    payload: todos,
   }
 }
 
-export function toggleToDo(id) {
+export function toggleTodo(id) {
   return {
     type: TOGGLE_TODO,
     payload: id,
   }
 }
 
-export function editToDo(id) {
+export function editTodo(id) {
   return {
     type: EDIT_TODO,
     payload: id,
   }
 }
 
-export function cancelEditToDo() {
+export function cancelEditTodo() {
   return {
     type: CANCEL_EDIT_TODO,
   }
 }
 
-export function saveEditToDo(todo) {
+export function saveEditTodo(todo) {
   return {
     type: SAVE_EDIT_TODO,
     payload: todo,
@@ -126,5 +124,13 @@ export function toggleCollapseCategory(id) {
   return {
     type: TOGGLE_COLLAPSE_CATEGORY,
     id,
+  }
+}
+
+export function moveTodo(todoId, categoryId) {
+  return {
+    type: MOVE_TODO,
+    todoId,
+    categoryId,
   }
 }

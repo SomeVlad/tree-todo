@@ -1,22 +1,22 @@
 import React from 'react';
 import {Button, ButtonToolbar} from 'react-bootstrap';
 
-const ToDo = (props) => {
+const Todo = (props) => {
   const {
-    toDo: { id, completed, text},
-    toggleToDo,
-    editToDo,
+    todo: { id, completed, text},
+    toggleTodo,
+    editTodo,
   } = props;
   return (
     <li className="todo">
       <input
         type="checkbox"
         checked={completed}
-        onChange={() => toggleToDo(id)}
+        onChange={() => toggleTodo(id)}
       />
       <span className="todoTitle">{text}</span>
       <ButtonToolbar className="pull-right">
-        <Button bsSize="xsmall" onClick={() => editToDo(id)}>
+        <Button bsSize="xsmall" onClick={() => editTodo(id)}>
           <span className="glyphicon glyphicon-pencil" aria-hidden="true"/>
         </Button>
       </ButtonToolbar>
@@ -24,4 +24,4 @@ const ToDo = (props) => {
   )
 };
 
-export default ToDo;
+export default Todo;

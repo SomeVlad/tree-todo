@@ -1,14 +1,14 @@
 import {Modal, Button, FormGroup, FormControl} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import React from 'react';
-import {closeModal, addCategory, saveCategory} from '../redux/actions';
+import {closeModal, addCategory, saveCategory, setActiveCategory, toggleCollapseCategory} from '../redux/actions';
 
 
 class ModalComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputValue: this.props.defaultValue,
+      inputValue: "",
     };
   }
 
@@ -18,7 +18,7 @@ class ModalComponent extends React.Component {
     }
   }
 
-  handleChangeCategoryName = (e) => {
+  handleChangeCategoryName = e => {
     this.setState({inputValue: e.target.value})
   };
 
@@ -27,23 +27,27 @@ class ModalComponent extends React.Component {
     this.props.closeModal();
   };
 
-  handleAddSubCategory = (e) => {
+  handleAddSubCategory = e => {
     e.preventDefault();
     const name = this.state.inputValue;
-    const {parentId, addSubCategory, closeModal} = this.props;
+    const {
+      parentId,
+      addSubCategory,
+      closeModal,
+    } = this.props;
     addSubCategory(name, parentId);
-    this.setState({inputValue: ''});
     closeModal();
+    this.setState({inputValue: ''});
   };
 
-  handleSaveCategory = (e) => {
+  handleSaveCategory = e => {
     e.preventDefault();
     const name = this.state.inputValue;
-    const {id, saveCategory, closeModal} = this.props;
-    saveCategory(id, name);
-    this.setState({inputValue: ''})
+    const {categoryId, saveCategory, closeModal} = this.props;
+    saveCategory(categoryId, name);
     closeModal();
-  }
+    this.setState({inputValue: ''});
+  };
 
   render() {
     const {show, mode} = this.props;
@@ -82,23 +86,29 @@ class ModalComponent extends React.Component {
       </Modal>
     )
   }
-};
+}
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
+  let defaultValue = '';
+  if(state.modal.mode === 'edit') {
+    defaultValue = state.categories.find(category => category.id === state.modal.categoryId).name;
+  }
   return {
     show: state.modal.show,
     mode: state.modal.mode,
     parentId: state.modal.parentId,
-    id: state.modal.id,
-    defaultValue: state.modal.defaultValue,
+    categoryId: state.modal.categoryId,
+    defaultValue,
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     closeModal: () => dispatch(closeModal()),
-    addSubCategory: (name, parentId) => dispatch(addCategory(name, parentId)),
     saveCategory: (id, name) => dispatch(saveCategory(id, name)),
+    setActiveCategory: id => dispatch(setActiveCategory(id)),
+    toggleCollapseCategory: id => dispatch(toggleCollapseCategory(id)),
+    addSubCategory: (name, parentId) => dispatch(addCategory(name, parentId)),
   }
 };
 

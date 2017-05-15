@@ -2,12 +2,13 @@ import {connect} from 'react-redux';
 import CategoryList from './CategoryList';
 import {
   addCategory,
-  addSubcategory,
-  editCategory,
+  openAddSubcategoryModal,
+  openEditCategoryModal,
   deleteCategories,
   setActiveCategory,
-  deleteToDos,
-  toggleCollapseCategory
+  deleteTodos,
+  toggleCollapseCategory,
+  moveTodo
 } from '../redux/actions';
 
 
@@ -15,31 +16,21 @@ const mapStateToProps = (state) => {
   return {
     categories: state.categories,
     activeCategory: state.activeCategory,
-    toDos: state.toDos,
+    todos: state.todos,
+    editTodo: state.editTodo,
   }
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     addCategory: name => dispatch(addCategory(name)),
-    addSubcategory: (e, id) => {
-      e.stopPropagation();
-      dispatch(addSubcategory(id))
-    },
-    editCategory: (e, id, currentName) => {
-      e.stopPropagation();
-      dispatch(editCategory(id, currentName))
-    },
+    openAddSubcategoryModal: id => dispatch(openAddSubcategoryModal(id)),
+    openEditCategoryModal: (id, currentName) => dispatch(openEditCategoryModal(id, currentName)),
     deleteCategories: categories => dispatch(deleteCategories(categories)),
-    setActiveCategory: (e, id) => {
-      e.stopPropagation();
-      dispatch(setActiveCategory(id))
-    },
-    deleteToDos: toDos => dispatch(deleteToDos(toDos)),
-    toggleCollapseCategory: (e, id) => {
-      e.stopPropagation();
-      dispatch(toggleCollapseCategory(id))
-    }
+    setActiveCategory: id => dispatch(setActiveCategory(id)),
+    toggleCollapseCategory: id => dispatch(toggleCollapseCategory(id)),
+    deleteTodos: todos => dispatch(deleteTodos(todos)),
+    moveTodo: (todoId, categoryId) => dispatch(moveTodo(todoId, categoryId)),
   }
 };
 

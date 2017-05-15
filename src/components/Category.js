@@ -23,15 +23,49 @@ class Category extends React.Component {
     this.setState({hover: false})
   };
 
+  handleToggleCollapse = e => {
+    e.stopPropagation();
+    this.props.toggleCollapseCategory(this.props.category.id)
+  };
+
+  handleOpenEditCategoryModal = e => {
+    e.stopPropagation();
+    this.props.openEditCategoryModal(this.props.category.id)
+  };
+
+  handleOpenAddSubcategoryModal = e => {
+    e.stopPropagation();
+    this.props.openAddSubcategoryModal(this.props.category.id)
+  };
+
+  handleClickCategory = e => {
+    e.stopPropagation();
+    this.props.setActiveCategory(this.props.category.id)
+  };
+
+  handleDeleteCategory = e => {
+    e.stopPropagation();
+    this.props.deleteCategory(this.props.category.id)
+  };
+
+  handleMoveTodo = e => {
+    e.stopPropagation();
+    const {
+      category: {id: categoryId},
+      editTodo: {id: todoId},
+      moveTodo,
+      setActiveCategory,
+    } = this.props;
+    moveTodo(todoId, categoryId);
+    setActiveCategory(categoryId);
+  };
+
   render() {
     const {
       category: {id, name, children, collapsed},
-      editCategory,
-      addSubcategory,
-      setActiveCategory,
-      deleteCategory,
-      toggleCollapseCategory,
       active,
+      deleteCategory,
+      editTodo,
     } = this.props;
 
     const categoryClass = classNames(
@@ -41,7 +75,6 @@ class Category extends React.Component {
         hover: this.state.hover,
       },
     );
-
 
     const categoryCollapseClass = classNames(
       'glyphicon',
@@ -57,25 +90,37 @@ class Category extends React.Component {
           className={categoryClass}
           onMouseOver={this.handleMouseOver}
           onMouseOut={this.handleMouseOut}
-          onClick={e => {setActiveCategory(e, id)}}
+          onClick={this.handleClickCategory}
         >
           {children.length > 0 &&
-            <Button className="category__triangle" bsSize="xsmall" >
-              <span onClick={e => {toggleCollapseCategory(e, id)}} className={categoryCollapseClass}/>
+            <Button
+              className="category__triangle"
+              bsSize="xsmall"
+              onClick={this.handleToggleCollapse}
+            >
+              <span className={categoryCollapseClass}/>
             </Button>
           }
           <span className="category__title">{name}</span>
-          <ButtonToolbar className="pull-right">
-            <Button bsSize="xsmall" onClick={e => editCategory(e, id, name)}>
-              <span className="glyphicon glyphicon-pencil" aria-hidden="true"/>
-            </Button>
-            <Button bsStyle="success" bsSize="xsmall" onClick={e => addSubcategory(e, id)}>
-              <span className="glyphicon glyphicon-plus" aria-hidden="true"/>
-            </Button>
-            <Button bsStyle="danger" bsSize="xsmall" onClick={() => {deleteCategory(id)}}>
-              <span className="glyphicon glyphicon-trash" aria-hidden="true"/>
-            </Button>
-          </ButtonToolbar>
+          {!editTodo.show ?
+            <ButtonToolbar className="pull-right">
+              <Button bsSize="xsmall" onClick={this.handleOpenEditCategoryModal}>
+                <span className="glyphicon glyphicon-pencil" aria-hidden="true"/>
+              </Button>
+              <Button bsStyle="success" bsSize="xsmall" onClick={this.handleOpenAddSubcategoryModal}>
+                <span className="glyphicon glyphicon-plus" aria-hidden="true"/>
+              </Button>
+              <Button bsStyle="danger" bsSize="xsmall" onClick={this.handleDeleteCategory}>
+                <span className="glyphicon glyphicon-trash" aria-hidden="true"/>
+              </Button>
+            </ButtonToolbar>
+            :
+            <ButtonToolbar className="pull-right">
+              <Button bsSize="xsmall" onClick={this.handleMoveTodo}>
+                <span className="glyphicon glyphicon_flip glyphicon-share-alt" aria-hidden="true"/>
+              </Button>
+            </ButtonToolbar>
+          }
         </div>
         {this.props.children}
       </li>
