@@ -13,7 +13,7 @@ ReactDOM.render(
     <Router>
       <Grid>
         <Route exact path="/" component={Home} />
-        <Route path="/:page/:id" component={TodoEdit}/>
+        <Route path="/edit/:id" component={TodoEdit}/>
       </Grid>
     </Router>
   </Provider >,

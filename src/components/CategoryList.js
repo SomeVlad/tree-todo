@@ -32,22 +32,26 @@ class CategoryList extends React.Component {
     deleteTodos(todosToDelete);
   };
 
+  handleSetActiveCategory = (id) => {
+    const {editMode, setActiveCategory} = this.props;
+    if(!editMode) {
+      setActiveCategory(id);
+    }
+  };
+
+
   renderCategories = (idsToRender, categories) => {
     const categoriesToRender = [];
     categories.forEach(category => {
       if(idsToRender.indexOf(category.id) >= 0) {
         categoriesToRender.push(
           <Category
+            {...this.props}
+            active={this.props.activeCategory === category.id}
+            setActiveCategory={this.handleSetActiveCategory}
             key={category.id}
             category={category}
             deleteCategory={this.handleDeleteCategory}
-            openAddSubcategoryModal={this.props.openAddSubcategoryModal}
-            openEditCategoryModal={this.props.openEditCategoryModal}
-            setActiveCategory={this.props.setActiveCategory}
-            toggleCollapseCategory={this.props.toggleCollapseCategory}
-            active={this.props.activeCategory === category.id}
-            editMode={this.props.editMode}
-            moveTodo={this.props.moveTodo}
           >
             {category.children.length && category.collapsed ? this.renderCategories(category.children, categories) : null}
           </Category>
@@ -58,14 +62,16 @@ class CategoryList extends React.Component {
   };
 
   render(){
-    const { categories, addCategory } = this.props;
+    const { categories, addCategory, editMode } = this.props;
     const rootCategoriesIds = categories.filter(category => category.parentId === null).map(category => category.id);
     return (
       <div>
         <Row>
-          <Col md={12}>
-            <AddForm onSubmit={addCategory} buttonText="Add Category"/>
-          </Col>
+          {!editMode &&
+            <Col md={12}>
+              <AddForm onSumbitForm={addCategory} buttonText="Add Category"/>
+            </Col>
+          }
         </Row>
         <Row>
           <Col className="categoriesWrapper" md={12}>

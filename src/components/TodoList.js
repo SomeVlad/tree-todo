@@ -1,6 +1,7 @@
 import React from 'react';
-import {Form, FormControl, Button, Row, Col} from 'react-bootstrap';
+import {Row, Col} from 'react-bootstrap';
 import Todo from './Todo';
+import AddForm from './AddForm';
 
 class TodoList extends React.Component {
   constructor(props) {
@@ -14,12 +15,10 @@ class TodoList extends React.Component {
     this.setState({input: e.target.value})
   };
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const name = this.state.input;
+  handleSubmit = (name) => {
+    console.log(name)
     const categoryId = this.props.activeCategory;
-    this.props.addTodo(categoryId,name);
-    this.setState({input: ''});
+    this.props.addTodo(categoryId, name);
   };
 
   render() {
@@ -28,18 +27,9 @@ class TodoList extends React.Component {
       <div>
         <Row>
           <Col md={12}>
-            <Form className="addForm pull-right" inline onSubmit={this.handleSubmit}>
-              <FormControl
-                type="text"
-                placeholder="Enter text"
-                value={this.state.input}
-                onChange={this.handleInputChange}
-              />
-              {' '}
-              <Button bsStyle="primary" type="submit" disabled={!activeCategory}>
-                Add Todo
-              </Button>
-            </Form>
+            <div className="pull-right">
+              <AddForm onSumbitForm={this.handleSubmit} buttonText="Add Todo" disabled={!activeCategory}/>
+            </div>
           </Col>
         </Row>
         <Row>

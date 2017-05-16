@@ -16,7 +16,7 @@ class AddForm extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     const value = this.state.value;
-    this.props.onSubmit(value);
+    this.props.onSumbitForm(value);
     this.setState({value: ''});
   };
 
@@ -26,11 +26,12 @@ class AddForm extends React.Component {
         <FormControl
           type="text"
           placeholder="Enter text"
-          value={this.state.input}
+          value={this.state.value}
           onChange={this.handleInputChange}
+          disabled={this.props.disabled}
         />
         {' '}
-        <Button bsStyle="primary" type="submit">
+        <Button bsStyle="primary" type="submit" disabled={this.props.disabled || !this.state.value.trim()}>
           {this.props.buttonText}
         </Button>
       </Form>
