@@ -20,14 +20,14 @@ import {
 const initialCategories = [
   {
     name: 'category1',
-    id: 1,
+    id: "1",
     parentId: null,
     children: [],
     collapsed: false,
   },
   {
     name: 'category2',
-    id: 2,
+    id: "2",
     parentId: null,
     children: [],
     collapsed: false,
@@ -48,9 +48,9 @@ const initialEditTodo = {
 
 const initialTodos = [
   {
-    categoryId: 1,
+    categoryId: "1",
     text: 'buy some milk',
-    id: 1,
+    id: "1",
     completed: false,
     description: 'some boring description',
   }

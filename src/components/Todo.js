@@ -1,11 +1,11 @@
 import React from 'react';
 import {Button, ButtonToolbar} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
 const Todo = (props) => {
   const {
     todo: { id, completed, text},
     toggleTodo,
-    editTodo,
   } = props;
   return (
     <li className="todo">
@@ -16,9 +16,11 @@ const Todo = (props) => {
       />
       <span className="todoTitle">{text}</span>
       <ButtonToolbar className="pull-right">
-        <Button bsSize="xsmall" onClick={() => editTodo(id)}>
-          <span className="glyphicon glyphicon-pencil" aria-hidden="true"/>
-        </Button>
+        <Link to={`/edit/${id}`}>
+          <Button bsSize="xsmall">
+            <span className="glyphicon glyphicon-pencil" aria-hidden="true"/>
+          </Button>
+        </Link>
       </ButtonToolbar>
     </li>
   )

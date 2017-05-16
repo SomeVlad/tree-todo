@@ -1,10 +1,10 @@
 import {connect} from 'react-redux';
 import {cancelEditTodo, saveEditTodo} from '../redux/actions';
-import TodoEdit from './TodoEdit';
+import TodoEditForm from './TodoEditForm';
 
-const mapStateToProps = state => {
-	const todo = state.todos.find(todo => todo.id === state.editTodo.id);
-  return {
+const mapStateToProps = (state, ownProps) => {
+	const todo = state.todos.find(todo => todo.id === ownProps.id);
+	return {
   	id: todo.id,
   	text: todo.text,
   	completed: todo.completed,
@@ -19,6 +19,6 @@ const mapDispatchToProps = dispatch => {
   }
 };
 
-const TodoEditContainer = connect(mapStateToProps, mapDispatchToProps)(TodoEdit);
+const TodoEditFormContainer = connect(mapStateToProps, mapDispatchToProps)(TodoEditForm);
 
-export default TodoEditContainer;
+export default TodoEditFormContainer;

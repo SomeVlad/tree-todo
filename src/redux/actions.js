@@ -17,7 +17,7 @@ export const TOGGLE_COLLAPSE_CATEGORY = 'TOGGLE_COLLAPSE_CATEGORY';
 export const MOVE_TODO = 'MOVE_TODO';
 
 export function addSubCategory(name, parentId) {
-  return(dispatch, getState) => {
+  return (dispatch, getState) => {
     const parentCategory = getState().categories.find(category => category.id === parentId);
     dispatch(addCategory(name, parentId));
     if(!parentCategory.collapsed){
@@ -138,9 +138,12 @@ export function toggleCollapseCategory(id) {
 }
 
 export function moveTodo(todoId, categoryId) {
-  return {
-    type: MOVE_TODO,
-    todoId,
-    categoryId,
+  return (dispatch) => {
+    dispatch({
+      type: MOVE_TODO,
+      todoId,
+      categoryId,
+    });
+    dispatch(setActiveCategory(categoryId))
   }
 }

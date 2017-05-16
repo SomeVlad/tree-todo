@@ -64,7 +64,7 @@ class Category extends React.Component {
     const {
       category: {name, children, collapsed},
       active,
-      editTodo,
+      editMode,
     } = this.props;
 
     const categoryClass = classNames(
@@ -101,7 +101,7 @@ class Category extends React.Component {
             </Button>
           }
           <span className="category__title">{name}</span>
-          {!editTodo.show ?
+          {!editMode ?
             <ButtonToolbar className="pull-right">
               <Button bsSize="xsmall" onClick={this.handleOpenEditCategoryModal}>
                 <span className="glyphicon glyphicon-pencil" aria-hidden="true"/>

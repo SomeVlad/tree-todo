@@ -1,28 +1,10 @@
 import React from 'react';
-import {Form, FormControl, Button, Row, Col} from 'react-bootstrap';
+import {Row, Col} from 'react-bootstrap';
 import Category from './Category';
-
+import AddForm from './AddForm';
 
 class CategoryList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      input: '',
-    }
-  }
 
-  handleInputChange = (e) => {
-    this.setState({input: e.target.value})
-  };
-
-  handleAddRootCategory = (e) => {
-    e.preventDefault();
-    const name = this.state.input;
-    this.props.addCategory(name);
-    this.setState({input: ''});
-  };
-
-  //TODO перенести всю логику в контейнер
   handleDeleteCategory = id => {
     const { categories,  deleteCategories, todos, deleteTodos} = this.props;
 
@@ -38,7 +20,9 @@ class CategoryList extends React.Component {
     };
 
     const findTodos = (categoriesToDelete, todos) => {
-      return todos.filter(todo => categoriesToDelete.indexOf(todo.categoryId) !== -1).map(todo => todo.id)
+      return todos
+        .filter(todo => categoriesToDelete.indexOf(todo.categoryId) !== -1)
+        .map(todo => todo.id)
     };
 
     const categoriesToDelete = findChildren(id, categories);
@@ -62,7 +46,7 @@ class CategoryList extends React.Component {
             setActiveCategory={this.props.setActiveCategory}
             toggleCollapseCategory={this.props.toggleCollapseCategory}
             active={this.props.activeCategory === category.id}
-            editTodo={this.props.editTodo}
+            editMode={this.props.editMode}
             moveTodo={this.props.moveTodo}
           >
             {category.children.length && category.collapsed ? this.renderCategories(category.children, categories) : null}
@@ -74,24 +58,13 @@ class CategoryList extends React.Component {
   };
 
   render(){
-    const { categories } = this.props;
+    const { categories, addCategory } = this.props;
     const rootCategoriesIds = categories.filter(category => category.parentId === null).map(category => category.id);
     return (
       <div>
         <Row>
           <Col md={12}>
-            <Form className="addForm" inline onSubmit={this.handleAddRootCategory}>
-              <FormControl
-                type="text"
-                placeholder="Enter text"
-                value={this.state.input}
-                onChange={this.handleInputChange}
-              />
-              {' '}
-              <Button bsStyle="primary" type="submit">
-                Add category
-              </Button>
-            </Form>
+            <AddForm onSubmit={addCategory} buttonText="Add Category"/>
           </Col>
         </Row>
         <Row>
