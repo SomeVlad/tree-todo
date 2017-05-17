@@ -17,22 +17,6 @@ import {
   MOVE_TODO,
 } from './actions';
 
-const initialCategories = [
-  {
-    name: 'category1',
-    id: "1",
-    parentId: null,
-    children: [],
-    collapsed: false,
-  },
-  {
-    name: 'category2',
-    id: "2",
-    parentId: null,
-    children: [],
-    collapsed: false,
-  }
-];
 
 const initialModal = {
   show: false,
@@ -46,17 +30,8 @@ const initialEditTodo = {
   id: null,
 };
 
-const initialTodos = [
-  {
-    categoryId: "1",
-    text: 'buy some milk',
-    id: "1",
-    completed: false,
-    description: 'some boring description',
-  }
-];
 
-const categories = (state = initialCategories, action) => {
+const categories = (state = [], action) => {
   switch (action.type) {
     case ADD_CATEGORY:
       const newCategory = action.payload;
@@ -138,7 +113,7 @@ const activeCategory = (state = null, action) => {
   }
 };
 
-const todos = (state = initialTodos, action) => {
+const todos = (state = [], action) => {
   switch (action.type) {
     case ADD_TODO:
       return [

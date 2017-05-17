@@ -4,19 +4,8 @@ import Todo from './Todo';
 import AddForm from './AddForm';
 
 class TodoList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      input: '',
-    }
-  }
-
-  handleInputChange = (e) => {
-    this.setState({input: e.target.value})
-  };
 
   handleSubmit = (name) => {
-    console.log(name)
     const categoryId = this.props.activeCategory;
     this.props.addTodo(categoryId, name);
   };

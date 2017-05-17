@@ -1,4 +1,4 @@
-import {Modal, Button, FormGroup, FormControl} from 'react-bootstrap';
+import {Modal, Button, FormGroup, FormControl, Form} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import React from 'react';
 import {closeModal, addSubCategory, saveCategory, setActiveCategory, toggleCollapseCategory} from '../redux/actions';
@@ -8,55 +8,60 @@ class ModalComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputValue: "",
+      value: "",
     };
   }
 
   componentWillReceiveProps(newProps){
     if(newProps.defaultValue) {
-      this.setState({inputValue: newProps.defaultValue});
+      this.setState({value: newProps.defaultValue});
     }
   }
 
   handleChangeCategoryName = e => {
-    this.setState({inputValue: e.target.value})
+    this.setState({value: e.target.value})
   };
 
   handleCloseModal = () => {
-    this.setState({inputValue: ''});
+    this.setState({value: ''});
     this.props.closeModal();
   };
 
-  handleAddSubCategory = e => {
-    e.preventDefault();
-    const name = this.state.inputValue;
+  handleAddSubCategory = () => {
+    const name = this.state.value;
     const {
       parentId,
       addSubCategory,
-      closeModal,
     } = this.props;
     addSubCategory(name, parentId);
-    closeModal();
-    this.setState({inputValue: ''});
+
   };
 
-  handleSaveCategory = e => {
-    e.preventDefault();
-    const name = this.state.inputValue;
-    const {categoryId, saveCategory, closeModal} = this.props;
+  handleSaveCategory = () => {
+    const name = this.state.value;
+    const {categoryId, saveCategory} = this.props;
     saveCategory(categoryId, name);
-    closeModal();
-    this.setState({inputValue: ''});
   };
 
+  handleSubmit = e => {
+    e.preventDefault();
+    const {mode, closeModal} = this.props;
+    if(mode === 'add') {
+      this.handleAddSubCategory();
+    } else if(mode === 'edit') {
+      this.handleSaveCategory();
+    }
+    closeModal();
+    this.setState({value: ''});
+  };
   render() {
     const {show, mode} = this.props;
     
-    let submitButton;
+    let submitButtonTitle = "";
     if (mode === 'add') {
-      submitButton = <Button type="submit" onClick={this.handleAddSubCategory} bsStyle="primary">Add</Button>
+      submitButtonTitle = "Add"
     } else if (mode === 'edit') {
-      submitButton = <Button type="submit" onClick={this.handleSaveCategory} bsStyle="primary">Save</Button>
+      submitButtonTitle = "Save"
     }
 
     return(
@@ -66,13 +71,13 @@ class ModalComponent extends React.Component {
         </Modal.Header>
 
         <Modal.Body>
-          <form onSubmit={this.handleAddSubCategory}>
+          <form id="modalForm" onSubmit={this.handleSubmit}>
             <FormGroup>
               <FormControl
                 autoFocus
                 type="text"
                 placeholder="Enter text"
-                value={this.state.inputValue}
+                value={this.state.value}
                 onChange={this.handleChangeCategoryName}
               />
             </FormGroup>
@@ -81,7 +86,7 @@ class ModalComponent extends React.Component {
 
         <Modal.Footer>
           <Button onClick={this.handleCloseModal}>Close</Button>
-          {submitButton}
+          <Button type="submit" form="modalForm" bsStyle="primary">{submitButtonTitle}</Button>
         </Modal.Footer>
       </Modal>
     )
