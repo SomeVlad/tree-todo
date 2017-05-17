@@ -1,5 +1,6 @@
 import React from 'react';
 import {ButtonToolbar, Button, Col, Form, FormControl} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
 class TodoEditForm extends React.Component {
   constructor(props) {
@@ -36,7 +37,6 @@ class TodoEditForm extends React.Component {
   };
 
   render() {
-    const {cancelEditTodo} = this.props;
     return (
       <div>
         <Col md={12}>
@@ -44,9 +44,11 @@ class TodoEditForm extends React.Component {
             <Button onClick={this.handleSave}>
               Save changes
             </Button>
-            <Button onClick={cancelEditTodo}>
-              Cancel
-            </Button>
+            <Link to="/">
+              <Button>
+                Cancel
+              </Button>
+            </Link>
           </ButtonToolbar>
         </Col>
         <Col md={12}>

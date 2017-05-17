@@ -1,4 +1,4 @@
-import {Modal, Button, FormGroup, FormControl, Form} from 'react-bootstrap';
+import {Modal, Button, FormGroup, FormControl} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import React from 'react';
 import {closeModal, addSubCategory, saveCategory, setActiveCategory, toggleCollapseCategory} from '../redux/actions';

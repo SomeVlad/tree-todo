@@ -26,7 +26,7 @@ const mapDispatchToProps = dispatch => {
     addCategory: name => dispatch(addCategory(name)),
     openAddSubcategoryModal: id => dispatch(openAddSubcategoryModal(id)),
     openEditCategoryModal: (id, currentName) => dispatch(openEditCategoryModal(id, currentName)),
-    deleteCategories: categories => dispatch(deleteCategories(categories)),
+    deleteCategories: (categoryId, parentId, categories) => dispatch(deleteCategories(categoryId, parentId, categories)),
     setActiveCategory: id => dispatch(setActiveCategory(id)),
     toggleCollapseCategory: id => dispatch(toggleCollapseCategory(id)),
     deleteTodos: todos => dispatch(deleteTodos(todos)),

@@ -5,7 +5,7 @@ import AddForm from './AddForm';
 
 class CategoryList extends React.Component {
 
-  handleDeleteCategory = id => {
+  handleDeleteCategory = (categoryId, parentId) => {
     const { categories,  deleteCategories, todos, deleteTodos} = this.props;
 
     const findChildren = (id, categories) => {
@@ -24,15 +24,13 @@ class CategoryList extends React.Component {
         .filter(todo => categoriesToDelete.indexOf(todo.categoryId) !== -1)
         .map(todo => todo.id)
     };
-
-    const categoriesToDelete = findChildren(id, categories);
+    const categoriesToDelete = findChildren(categoryId, categories);
     const todosToDelete = findTodos(categoriesToDelete, todos);
-
-    deleteCategories(categoriesToDelete);
+    deleteCategories(categoryId, parentId, categoriesToDelete);
     deleteTodos(todosToDelete);
   };
 
-  handleSetActiveCategory = (id) => {
+  handleSetActiveCategory = id => {
     const {editMode, setActiveCategory} = this.props;
     if(!editMode) {
       setActiveCategory(id);

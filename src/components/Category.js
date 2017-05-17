@@ -45,7 +45,8 @@ class Category extends React.Component {
 
   handleDeleteCategory = e => {
     e.stopPropagation();
-    this.props.deleteCategory(this.props.category.id)
+    const {category: {id, parentId}, deleteCategory} = this.props;
+    deleteCategory(id, parentId);
   };
 
   handleMoveTodo = e => {

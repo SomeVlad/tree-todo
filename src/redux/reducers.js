@@ -10,8 +10,6 @@ import {
   ADD_TODO,
   DELETE_TODOS,
   TOGGLE_TODO,
-  EDIT_TODO,
-  CANCEL_EDIT_TODO,
   SAVE_EDIT_TODO,
   TOGGLE_COLLAPSE_CATEGORY,
   MOVE_TODO,
@@ -24,12 +22,6 @@ const initialModal = {
   parentId: null,
   categoryId: null,
 };
-
-const initialEditTodo = {
-  show: false,
-  id: null,
-};
-
 
 const categories = (state = [], action) => {
   switch (action.type) {
@@ -58,7 +50,17 @@ const categories = (state = [], action) => {
         }
       });
     case DELETE_CATEGORY:
-      return state.filter(category => action.payload.indexOf(category.id) === -1);
+      return state
+        .filter(category => action.categories.indexOf(category.id) === -1)
+        .map(category => {
+          if(category.id === action.parentId){
+            return {
+              ...category,
+              children: category.children.filter(child => child !== action.categoryId),
+            }
+          }
+          return category;
+        });
     case TOGGLE_COLLAPSE_CATEGORY:
       return state.map(category => {
         if(category.id === action.id) {
@@ -163,31 +165,6 @@ const todos = (state = [], action) => {
   }
 };
 
-const editTodo = (state = initialEditTodo, action) => {
-  switch (action.type) {
-    case EDIT_TODO:
-      return {
-        ...state,
-        show: true,
-        id: action.payload,
-      };
-    case CANCEL_EDIT_TODO:
-      return {
-        ...state,
-        show: false,
-        id: null,
-      };
-    case SAVE_EDIT_TODO:
-      return {
-        ...state,
-        show: false,
-        id: null,
-      };
-    default:
-      return state;
-  }
-};
-
-const rootReducer = combineReducers({todos,categories, modal, activeCategory, editTodo});
+const rootReducer = combineReducers({todos,categories, modal, activeCategory});
 
 export default rootReducer;

@@ -32,9 +32,7 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => {
-  return {
-    showEditTodo: state.editTodo.show,
-  }
+  return {}
 };
 
 export default connect(mapStateToProps)(Home);

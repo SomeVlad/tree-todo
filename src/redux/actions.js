@@ -69,10 +69,12 @@ export function saveCategory(id, name) {
   }
 }
 
-export function deleteCategories(categories) {
+export function deleteCategories(categoryId, parentId, categories) {
   return {
     type: DELETE_CATEGORY,
-    payload: categories,
+    categoryId,
+    parentId,
+    categories,
   }
 }
 
@@ -107,19 +109,6 @@ export function toggleTodo(id) {
   return {
     type: TOGGLE_TODO,
     payload: id,
-  }
-}
-
-export function editTodo(id) {
-  return {
-    type: EDIT_TODO,
-    payload: id,
-  }
-}
-
-export function cancelEditTodo() {
-  return {
-    type: CANCEL_EDIT_TODO,
   }
 }
 
