@@ -115,7 +115,7 @@ export function toggleTodo(id) {
 export function saveEditTodo(todo) {
   return {
     type: SAVE_EDIT_TODO,
-    payload: todo,
+    todo,
   }
 }
 
@@ -127,7 +127,7 @@ export function toggleCollapseCategory(id) {
 }
 
 export function moveTodo(todoId, categoryId) {
-  return (dispatch) => {
+  return dispatch => {
     dispatch({
       type: MOVE_TODO,
       todoId,

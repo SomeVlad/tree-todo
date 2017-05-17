@@ -53,19 +53,20 @@ class Category extends React.Component {
     e.stopPropagation();
     const {
       category: {id: categoryId},
-      editTodo: {id: todoId},
+      editedTodoId,
       moveTodo,
       setActiveCategory,
     } = this.props;
-    moveTodo(todoId, categoryId);
+    moveTodo(editedTodoId, categoryId);
     setActiveCategory(categoryId);
   };
 
   render() {
     const {
-      category: {name, children, collapsed},
+      category: {id, name, children, collapsed},
       active,
       editMode,
+      editedCategoryId,
     } = this.props;
 
     const categoryClass = classNames(
@@ -83,6 +84,32 @@ class Category extends React.Component {
         'glyphicon-triangle-bottom': collapsed,
       },
     );
+
+    let buttons = null;
+
+    if(!editMode) {
+      buttons = (
+        <ButtonToolbar className="pull-right">
+          <Button bsSize="xsmall" onClick={this.handleOpenEditCategoryModal}>
+            <span className="glyphicon glyphicon-pencil" aria-hidden="true"/>
+          </Button>
+          <Button bsStyle="success" bsSize="xsmall" onClick={this.handleOpenAddSubcategoryModal}>
+            <span className="glyphicon glyphicon-plus" aria-hidden="true"/>
+          </Button>
+          <Button bsStyle="danger" bsSize="xsmall" onClick={this.handleDeleteCategory}>
+            <span className="glyphicon glyphicon-trash" aria-hidden="true"/>
+          </Button>
+        </ButtonToolbar>
+      )
+    } else if(editMode && editedCategoryId !== id) {
+      buttons = (
+        <ButtonToolbar className="pull-right">
+          <Button bsSize="xsmall" onClick={this.handleMoveTodo}>
+            <span className="glyphicon glyphicon_flip glyphicon-share-alt" aria-hidden="true"/>
+          </Button>
+        </ButtonToolbar>
+      )
+    }
 
     return (
       <li>
@@ -102,25 +129,7 @@ class Category extends React.Component {
             </Button>
           }
           <span className="category__title">{name}</span>
-          {!editMode ?
-            <ButtonToolbar className="pull-right">
-              <Button bsSize="xsmall" onClick={this.handleOpenEditCategoryModal}>
-                <span className="glyphicon glyphicon-pencil" aria-hidden="true"/>
-              </Button>
-              <Button bsStyle="success" bsSize="xsmall" onClick={this.handleOpenAddSubcategoryModal}>
-                <span className="glyphicon glyphicon-plus" aria-hidden="true"/>
-              </Button>
-              <Button bsStyle="danger" bsSize="xsmall" onClick={this.handleDeleteCategory}>
-                <span className="glyphicon glyphicon-trash" aria-hidden="true"/>
-              </Button>
-            </ButtonToolbar>
-            :
-            <ButtonToolbar className="pull-right">
-              <Button bsSize="xsmall" onClick={this.handleMoveTodo}>
-                <span className="glyphicon glyphicon_flip glyphicon-share-alt" aria-hidden="true"/>
-              </Button>
-            </ButtonToolbar>
-          }
+          {buttons}
         </div>
         {this.props.children}
       </li>

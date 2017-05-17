@@ -4,7 +4,7 @@ import CategoryListContainer from './CategoryListContainer';
 import TodoEditFormContainer from './TodoEditFormContainer';
 
 const TodoEdit = (props) => {
-  const {match} = props;
+  const {match, history} = props;
   return (
     <div>
       <Row>
@@ -12,10 +12,10 @@ const TodoEdit = (props) => {
       </Row>
       <Row>
         <Col md={5}>
-          <CategoryListContainer editMode/>
+          <CategoryListContainer editedTodoId={match.params.id} editMode/>
         </Col>
         <Col md={7}>
-          <TodoEditFormContainer id={match.params.id}/>
+          <TodoEditFormContainer id={match.params.id} history={history}/>
         </Col>
       </Row>
     </div>

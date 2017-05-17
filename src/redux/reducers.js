@@ -136,14 +136,13 @@ const todos = (state = [], action) => {
         }
       });
     case SAVE_EDIT_TODO:
-      const newTodo = action.payload;
       return state.map(todo => {
-        if(todo.id === newTodo.id) {
+        if(todo.id === action.todo.id) {
           return {
             ...todo,
-            text: newTodo.text,
-            completed: newTodo.completed,
-            description: newTodo.description,
+            text: action.todo.text,
+            completed: action.todo.completed,
+            description: action.todo.description,
           }
         } else {
           return todo;

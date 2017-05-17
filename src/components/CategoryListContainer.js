@@ -12,12 +12,16 @@ import {
 } from '../redux/actions';
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+  let editedCategoryId = '';
+  if (ownProps.editMode) {
+    editedCategoryId = state.todos.find(todo => todo.id === ownProps.editedTodoId).categoryId;
+  }
   return {
     categories: state.categories,
     activeCategory: state.activeCategory,
     todos: state.todos,
-    editTodo: state.editTodo,
+    editedCategoryId,
   }
 };
 

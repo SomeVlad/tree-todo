@@ -17,11 +17,6 @@ class TodoEditForm extends React.Component {
     const {id, saveEditTodo} = this.props;
     const todo = { id, text, completed, description };
     saveEditTodo(todo);
-    this.setState({
-      text: '',
-      completed: '',
-      description: '',
-    })
   };
 
   handleTextChange = e => {
@@ -41,9 +36,11 @@ class TodoEditForm extends React.Component {
       <div>
         <Col md={12}>
           <ButtonToolbar className="pull-right">
-            <Button onClick={this.handleSave}>
-              Save changes
-            </Button>
+            <Link to="/">
+              <Button onClick={this.handleSave}>
+                Save changes
+              </Button>
+            </Link>
             <Link to="/">
               <Button>
                 Cancel
