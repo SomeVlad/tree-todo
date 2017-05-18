@@ -5,6 +5,7 @@ import CategoryListContainer from './CategoryListContainer';
 
 
 const Home = (props) => {
+  console.log(props.match.params)
   return (
     <Grid>
       <Row>
@@ -12,7 +13,7 @@ const Home = (props) => {
         <Col md={6}><FilterContainer/></Col>
       </Row>
       <Row>
-        <Col md={5}><CategoryListContainer history={props.history}/></Col>
+        <Col md={5}><CategoryListContainer activeCategory={props.match.params.id} history={props.history}/></Col>
       </Row>
     </Grid>
   )

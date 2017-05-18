@@ -12,7 +12,10 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Route path="/" component={Home} />
+      	<div>
+	        <Route path="/:id?" component={Home} />
+	        <ModalContainer />
+      	</div>
       </Router>
     );
   }

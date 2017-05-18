@@ -66,6 +66,7 @@ class CategoryList extends React.Component {
   };
 
   render(){
+    console.log(this.props.activeCategory)
     const { categories, addCategory, editMode } = this.props;
     const rootCategoriesIds = categories.filter(category => category.parentId === null).map(category => category.id);
     return (

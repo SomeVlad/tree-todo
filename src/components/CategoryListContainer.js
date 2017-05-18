@@ -19,7 +19,7 @@ const mapStateToProps = (state, ownProps) => {
   }
   return {
     categories: state.categories,
-    activeCategory: state.activeCategory,
+    activeCategory: ownProps.activeCategory,
     todos: state.todos,
     editedCategoryId,
   }
