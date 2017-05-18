@@ -12,6 +12,10 @@ li {
   list-style-type: none;
 }
 
+a {
+  text-decoration: none;
+}
+
 input[type=checkbox] {
   transform: scale(1.5);
   margin-left: 3px;

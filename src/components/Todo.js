@@ -6,6 +6,7 @@ const Todo = (props) => {
   const {
     todo: { id, completed, text},
     toggleTodo,
+    history,
   } = props;
   return (
     <li className="todo">
@@ -17,7 +18,7 @@ const Todo = (props) => {
       <span className="todoTitle">{text}</span>
       <ButtonToolbar className="pull-right">
         <Link to={`/edit/${id}`}>
-          <Button bsSize="xsmall">
+          <Button onClick={history.push(`/edit/${id}`)} bsSize="xsmall">
             <span className="glyphicon glyphicon-pencil" aria-hidden="true"/>
           </Button>
         </Link>

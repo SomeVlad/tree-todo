@@ -40,7 +40,9 @@ class Category extends React.Component {
 
   handleClickCategory = e => {
     e.stopPropagation();
-    this.props.setActiveCategory(this.props.category.id)
+    const {history, category, setActiveCategory} = this.props;
+    // setActiveCategory(category.id)
+    history.push(`/${category.id}`);
   };
 
   handleDeleteCategory = e => {
@@ -125,7 +127,7 @@ class Category extends React.Component {
               bsSize="xsmall"
               onClick={this.handleToggleCollapse}
             >
-              <span className={categoryCollapseClass}/>
+                <span className={categoryCollapseClass}/>
             </Button>
           }
           <span className="category__title">{name}</span>

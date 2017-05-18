@@ -3,7 +3,10 @@ import {FormControl, Form} from 'react-bootstrap';
 
 const FilterContainer = (props) => {
   return (
-    <Form style={{marginBottom: "20px"}} inline className="pull-right">
+    <Form style={{
+      marginBottom: "20px",
+      marginTop: "20px"
+    }} inline className="pull-right">
       <label>
         <input
           type="checkbox"
