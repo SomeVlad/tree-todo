@@ -3,10 +3,10 @@ import {addTodo, toggleTodo, editTodo} from '../redux/actions';
 import TodoList from './TodoList';
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+  const categoryId = ownProps.match.params.categoryId;
   return {
-    todos: state.todos.filter(todo => todo.categoryId === state.activeCategory),
-    activeCategory: state.activeCategory,
+    todos: state.todos.filter(todo => todo.categoryId === categoryId),
   }
 };
 

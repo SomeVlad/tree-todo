@@ -16,7 +16,18 @@ class ModalComponent extends React.Component {
     if(newProps.defaultValue) {
       this.setState({value: newProps.defaultValue});
     }
+    if(newProps.show) {
+      document.body.addEventListener('click', this.handleBodyClick)
+    } else if(!newProps.show) {
+      document.removeEventListener('click', this.handleBodyClick);
+    }
   }
+
+  handleBodyClick = (e) => {
+    if(e.target.className === "fade in modal"){
+      this.handleCloseModal()
+    }
+  };
 
   handleChangeCategoryName = e => {
     this.setState({value: e.target.value})

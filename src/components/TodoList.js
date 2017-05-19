@@ -6,18 +6,24 @@ import AddForm from './AddForm';
 class TodoList extends React.Component {
 
   handleSubmit = (name) => {
-    const categoryId = this.props.activeCategory;
+    const categoryId = this.props.match.params.categoryId;
     this.props.addTodo(categoryId, name);
   };
 
   render() {
-    const {todos, toggleTodo, editTodo, activeCategory} = this.props;
+    const {
+      todos,
+      toggleTodo,
+      editTodo,
+      match,
+      history,
+    } = this.props;
     return (
       <div>
         <Row>
           <Col md={12}>
             <div className="pull-right">
-              <AddForm onSumbitForm={this.handleSubmit} buttonText="Add Todo" disabled={!activeCategory}/>
+              <AddForm onSumbitForm={this.handleSubmit} buttonText="Add Todo" disabled={!match.params.categoryId}/>
             </div>
           </Col>
         </Row>

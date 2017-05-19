@@ -3,7 +3,6 @@ import {Grid, Col, Row} from 'react-bootstrap';
 import FilterContainer from './FilterContainer';
 import {BrowserRouter as Router, Route } from 'react-router-dom'
 import CategoryListContainer from './CategoryListContainer';
-import TodoListContainer from './TodoListContainer';
 import ModalContainer from './ModalContainer';
 import {clearState} from '../localStorage';
 import Home from './Home';
@@ -12,7 +11,10 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Route path="/" component={Home} />
+        <div>
+          <Route path="/" component={Home}/>
+          <ModalContainer/>
+        </div>
       </Router>
     );
   }
