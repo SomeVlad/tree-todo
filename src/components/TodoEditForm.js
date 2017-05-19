@@ -1,6 +1,5 @@
 import React from 'react';
 import {ButtonToolbar, Button, Col, Form, FormControl} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
 
 class TodoEditForm extends React.Component {
   constructor(props) {
@@ -40,7 +39,7 @@ class TodoEditForm extends React.Component {
             <Button onClick={this.handleSave}>
               Save changes
             </Button>
-            <Button onClick={this.props.history.push('/')}>
+            <Button onClick={() => {this.props.history.push('/')}}>
               Cancel
             </Button>
           </ButtonToolbar>
@@ -71,6 +70,7 @@ class TodoEditForm extends React.Component {
             rows={10}
             componentClass="textarea"
             placeholder="textarea"
+            resize="false"
           />
         </Col>
       </div>

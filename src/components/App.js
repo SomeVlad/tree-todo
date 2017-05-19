@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
-import {Grid, Col, Row} from 'react-bootstrap';
-import FilterContainer from './FilterContainer';
 import {BrowserRouter as Router, Route } from 'react-router-dom'
-import CategoryListContainer from './CategoryListContainer';
+import {Grid} from 'react-bootstrap';
+
 import ModalContainer from './ModalContainer';
-import {clearState} from '../localStorage';
 import Home from './Home';
+import TodoEdit from './TodoEdit';
+
 
 class App extends Component {
   render() {
     return (
       <Router>
-        <div>
-          <Route path="/" component={Home}/>
+        <Grid>
+          <Route exact path="/:categoryId?" component={Home}/>
+          <Route path="/edit-todo/:id" component={TodoEdit} />
           <ModalContainer/>
-        </div>
+        </Grid>
       </Router>
     );
   }

@@ -8,8 +8,9 @@ import TodoListContainer from './TodoListContainer';
 
 
 const Home = (props) => {
+  const { match } = props;
   return (
-    <Grid>
+    <div>
       <Row>
         <Col md={6}><h1>Todo List</h1></Col>
         <Col md={6}>
@@ -18,13 +19,13 @@ const Home = (props) => {
       </Row>
       <Row>
         <Col md={5}>
-          <CategoryListContainer history={props.history}/>
+          <CategoryListContainer activeCategory={match.params.categoryId} history={props.history}/>
         </Col>
         <Col md={7}>
-          <Route path="/:categoryId" component={TodoListContainer}/>
+          <Route exact path="/:categoryId" component={TodoListContainer}/>
         </Col>
       </Row>
-    </Grid>
+    </div>
   )
 };
 

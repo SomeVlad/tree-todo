@@ -5,12 +5,12 @@ import AddForm from './AddForm';
 
 class CategoryList extends React.Component {
 
-  componentDidMount() {
-    const {activeCategory, setActiveCategory, editedCategoryId, editMode} = this.props;
-    if(editMode && !activeCategory) {
-      setActiveCategory(editedCategoryId);
-    }
-  }
+  // componentDidMount() {
+  //   const {activeCategory, setActiveCategory, editedCategoryId, editMode} = this.props;
+  //   if(editMode && !activeCategory) {
+  //     setActiveCategory(editedCategoryId);
+  //   }
+  // }
 
   handleDeleteCategory = (categoryId, parentId) => {
     const { categories,  deleteCategories, todos, deleteTodos} = this.props;

@@ -31,7 +31,14 @@ class TodoList extends React.Component {
           <Col md={12}>
             <ul>
               {todos.map(todo => (
-                <Todo key={todo.id} todo={todo} toggleTodo={toggleTodo} editTodo={editTodo}/>
+                <Todo
+                  match={match}
+                  history={history}
+                  key={todo.id}
+                  todo={todo}
+                  toggleTodo={toggleTodo}
+                  editTodo={editTodo}
+                />
               ))}
             </ul>
           </Col>
