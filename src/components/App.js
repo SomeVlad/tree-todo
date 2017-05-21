@@ -4,7 +4,7 @@ import {Grid} from 'react-bootstrap';
 
 import ModalContainer from './ModalContainer';
 import Home from './Home';
-import TodoEdit from './TodoEdit';
+import TodoEditContainer from './TodoEditContainer';
 
 
 class App extends Component {
@@ -13,7 +13,7 @@ class App extends Component {
       <Router>
         <Grid>
           <Route exact path="/:categoryId?" component={Home}/>
-          <Route path="/edit-todo/:id" component={TodoEdit} />
+          <Route path="/edit-todo/:id" component={TodoEditContainer} />
           <ModalContainer/>
         </Grid>
       </Router>

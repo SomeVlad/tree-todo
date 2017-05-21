@@ -52,12 +52,19 @@ class Category extends React.Component {
     deleteCategory(id, parentId);
   };
 
+  handleChangeCategoryId = e => {
+    e.stopPropagation();
+    const {changeTodoEditValue, category: {id}} = this.props;
+    console.log(id)
+    changeTodoEditValue({categoryId: id});
+  }
+
   render() {
     const {
       category: {id, name, children, collapsed},
+      todoEditForm: {categoryId},
       active,
       editMode,
-      editedCategoryId,
     } = this.props;
 
     const categoryClass = classNames(
@@ -92,10 +99,10 @@ class Category extends React.Component {
           </Button>
         </ButtonToolbar>
       )
-    } else if(editMode && editedCategoryId !== id) {
+    } else if(editMode && categoryId !== id) {
       buttons = (
         <ButtonToolbar className="pull-right">
-          <Button bsSize="xsmall">
+          <Button onClick={this.handleChangeCategoryId} bsSize="xsmall">
             <span className="glyphicon glyphicon_flip glyphicon-share-alt" aria-hidden="true"/>
           </Button>
         </ButtonToolbar>

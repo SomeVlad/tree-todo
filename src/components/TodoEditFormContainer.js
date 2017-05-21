@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import TodoEditForm from './TodoEditForm';
-import {saveEditTodo, changeTodoEditValue} from '../redux/actions';
+import {saveEditTodo, changeTodoEditValue, resetEditTodoForm} from '../redux/actions';
 
 const mapStateToProps = (state, ownProps) => {
 	return {
@@ -12,6 +12,7 @@ const mapDispatchToProps = dispatch => {
   return {
     saveEditTodo: todo => dispatch(saveEditTodo(todo)),
     changeTodoEditValue: todoField => dispatch(changeTodoEditValue(todoField)),
+    resetEditTodoForm: () => dispatch(resetEditTodoForm()),
 	}
 };
 

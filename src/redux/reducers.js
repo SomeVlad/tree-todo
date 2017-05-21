@@ -13,6 +13,7 @@ import {
   TOGGLE_COLLAPSE_CATEGORY,
   CHANGE_EDIT_TODO_VALUE,
   FILL_EDIT_TODO_FORM,
+  RESET_EDIT_TODO_FORM,
 } from './actions';
 
 
@@ -158,6 +159,14 @@ const todoEditForm = (state = initialTodoEditForm, action) => {
       return {
         ...state,
         ...action.todoField,
+      }
+    case RESET_EDIT_TODO_FORM:
+      return {
+        id: null,
+        categoryId: null,
+        completed: false,
+        name: '',
+        description: '',
       }
     default:
       return state;

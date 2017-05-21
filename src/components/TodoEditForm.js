@@ -4,8 +4,9 @@ import {ButtonToolbar, Button, Col, Form, FormControl} from 'react-bootstrap';
 class TodoEditForm extends React.Component {
 
   handleSave = e => {
-    const {todo, saveEditTodo, history} = this.props;
+    const {todo, saveEditTodo, history, resetEditTodoForm} = this.props;
     saveEditTodo(todo);
+    resetEditTodoForm();
     history.push('/');
   };
 
@@ -16,10 +17,15 @@ class TodoEditForm extends React.Component {
     this.props.changeTodoEditValue(todoField);
   };
 
+  handleCancel = () => {
+    const {resetEditTodoForm, history} = this.props;
+    resetEditTodoForm();
+    history.push('/');
+  }
+
   render() {
     const {
       todo: {name, completed, description},
-      history,
     } = this.props;
     return (
       <div>
@@ -28,7 +34,7 @@ class TodoEditForm extends React.Component {
             <Button onClick={this.handleSave}>
               Save changes
             </Button>
-            <Button onClick={() => {history.push('/')}}>
+            <Button onClick={this.handleCancel}>
               Cancel
             </Button>
           </ButtonToolbar>
