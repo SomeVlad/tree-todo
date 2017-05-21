@@ -2,36 +2,25 @@ import React from 'react';
 import {ButtonToolbar, Button, Col, Form, FormControl} from 'react-bootstrap';
 
 class TodoEditForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: this.props.text,
-      completed: this.props.completed,
-      description: this.props.description,
-    }
-  }
 
   handleSave = e => {
-    const {text, completed, description} = this.state;
-    const {id, saveEditTodo, history} = this.props;
-    const todo = { id, text, completed, description };
+    const {todo, saveEditTodo, history} = this.props;
     saveEditTodo(todo);
     history.push('/');
   };
 
-  handleTextChange = e => {
-    this.setState({text: e.target.value})
-  };
-
-  handleDescriptionChange = e => {
-    this.setState({description: e.target.value})
-  };
-
-  handleCompletedChange = e => {
-    this.setState({completed: !this.state.completed})
+  handleValueChange = e => {
+    const key = e.target.name;
+    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
+    const todoField = {[key]: value};
+    this.props.changeTodoEditValue(todoField);
   };
 
   render() {
+    const {
+      todo: {name, completed, description},
+      history,
+    } = this.props;
     return (
       <div>
         <Col md={12}>
@@ -39,7 +28,7 @@ class TodoEditForm extends React.Component {
             <Button onClick={this.handleSave}>
               Save changes
             </Button>
-            <Button onClick={() => {this.props.history.push('/')}}>
+            <Button onClick={() => {history.push('/')}}>
               Cancel
             </Button>
           </ButtonToolbar>
@@ -48,29 +37,31 @@ class TodoEditForm extends React.Component {
           <Form className="addForm" inline>
             <FormControl
               type="text"
-              value={this.state.text}
-              onChange={this.handleTextChange}
+              value={name}
+              name="name"
+              onChange={this.handleValueChange}
             />
           </Form>
         </Col>
         <Col md={12}>
           <label>
             <input
-              onChange={this.handleCompletedChange}
+              onChange={this.handleValueChange}
               type="checkbox"
-              checked={this.state.completed}
+              name="completed"
+              checked={completed}
               style={{marginBottom: "20px"}}
             />{" "}done
           </label>
         </Col>
         <Col md={12}>
           <FormControl
-            onChange={this.handleDescriptionChange}
-            value={this.state.description}
+            onChange={this.handleValueChange}
+            value={description}
+            name="description"
             rows={10}
             componentClass="textarea"
             placeholder="textarea"
-            resize="false"
           />
         </Col>
       </div>

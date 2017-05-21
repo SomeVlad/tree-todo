@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {addTodo, toggleTodo, editTodo} from '../redux/actions';
+import {addTodo, toggleTodo, fillEditTodoForm} from '../redux/actions';
 import TodoList from './TodoList';
 
 
@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addTodo: (categoryId, text) => dispatch(addTodo(categoryId, text)),
     toggleTodo: id => dispatch(toggleTodo(id)),
-    editTodo: id => dispatch(editTodo(id)),
+    fillEditTodoForm: todo => dispatch(fillEditTodoForm(todo)),
   }
 };
 

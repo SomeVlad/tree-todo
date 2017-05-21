@@ -8,19 +8,13 @@ import {
   setActiveCategory,
   deleteTodos,
   toggleCollapseCategory,
-  moveTodo
 } from '../redux/actions';
 
 
 const mapStateToProps = (state, ownProps) => {
-  let editedCategoryId = '';
-  if (ownProps.editMode) {
-    editedCategoryId = state.todos.find(todo => todo.id === ownProps.editedTodoId).categoryId;
-  }
   return {
     categories: state.categories,
     todos: state.todos,
-    editedCategoryId,
   }
 };
 
@@ -33,7 +27,6 @@ const mapDispatchToProps = dispatch => {
     setActiveCategory: id => dispatch(setActiveCategory(id)),
     toggleCollapseCategory: id => dispatch(toggleCollapseCategory(id)),
     deleteTodos: todos => dispatch(deleteTodos(todos)),
-    moveTodo: (todoId, categoryId) => dispatch(moveTodo(todoId, categoryId)),
   }
 };
 

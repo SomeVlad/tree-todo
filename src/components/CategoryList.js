@@ -5,13 +5,6 @@ import AddForm from './AddForm';
 
 class CategoryList extends React.Component {
 
-  // componentDidMount() {
-  //   const {activeCategory, setActiveCategory, editedCategoryId, editMode} = this.props;
-  //   if(editMode && !activeCategory) {
-  //     setActiveCategory(editedCategoryId);
-  //   }
-  // }
-
   handleDeleteCategory = (categoryId, parentId) => {
     const { categories,  deleteCategories, todos, deleteTodos} = this.props;
 
@@ -37,13 +30,6 @@ class CategoryList extends React.Component {
     deleteTodos(todosToDelete);
   };
 
-  handleSetActiveCategory = id => {
-    const {editMode, setActiveCategory} = this.props;
-    if(!editMode) {
-      setActiveCategory(id);
-    }
-  };
-
   renderCategories = (idsToRender, categories) => {
     const categoriesToRender = [];
     categories.forEach(category => {
@@ -52,7 +38,6 @@ class CategoryList extends React.Component {
           <Category
             {...this.props}
             active={this.props.activeCategory === category.id}
-            setActiveCategory={this.handleSetActiveCategory}
             key={category.id}
             category={category}
             deleteCategory={this.handleDeleteCategory}
@@ -66,7 +51,6 @@ class CategoryList extends React.Component {
   };
 
   render(){
-    console.log(this.props.activeCategory)
     const { categories, addCategory, editMode } = this.props;
     const rootCategoriesIds = categories.filter(category => category.parentId === null).map(category => category.id);
     return (

@@ -40,27 +40,16 @@ class Category extends React.Component {
 
   handleClickCategory = e => {
     e.stopPropagation();
-    const {history, category, setActiveCategory} = this.props;
-    // setActiveCategory(category.id)
-    history.push(`/${category.id}`);
+    const {history, category, editMode} = this.props;
+    if(!editMode) {
+      history.push(`/${category.id}`);
+    }
   };
 
   handleDeleteCategory = e => {
     e.stopPropagation();
     const {category: {id, parentId}, deleteCategory} = this.props;
     deleteCategory(id, parentId);
-  };
-
-  handleMoveTodo = e => {
-    e.stopPropagation();
-    const {
-      category: {id: categoryId},
-      editedTodoId,
-      moveTodo,
-      setActiveCategory,
-    } = this.props;
-    moveTodo(editedTodoId, categoryId);
-    setActiveCategory(categoryId);
   };
 
   render() {
@@ -106,7 +95,7 @@ class Category extends React.Component {
     } else if(editMode && editedCategoryId !== id) {
       buttons = (
         <ButtonToolbar className="pull-right">
-          <Button bsSize="xsmall" onClick={this.handleMoveTodo}>
+          <Button bsSize="xsmall">
             <span className="glyphicon glyphicon_flip glyphicon-share-alt" aria-hidden="true"/>
           </Button>
         </ButtonToolbar>

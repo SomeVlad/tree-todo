@@ -6,13 +6,13 @@ import {
   OPEN_EDIT_CATEGORY_MODAL,
   SAVE_EDIT_CATEGORY,
   DELETE_CATEGORY,
-  SET_ACTIVE_CATEGORY,
   ADD_TODO,
   DELETE_TODOS,
   TOGGLE_TODO,
   SAVE_EDIT_TODO,
   TOGGLE_COLLAPSE_CATEGORY,
-  MOVE_TODO,
+  CHANGE_EDIT_TODO_VALUE,
+  FILL_EDIT_TODO_FORM,
 } from './actions';
 
 
@@ -22,6 +22,14 @@ const initialModal = {
   parentId: null,
   categoryId: null,
 };
+
+const initialTodoEditForm = {
+  id: null,
+  categoryId: null,
+  completed: false,
+  name: '',
+  description: '',
+}
 
 const categories = (state = [], action) => {
   switch (action.type) {
@@ -106,15 +114,6 @@ const modal = (state = initialModal, action) => {
   }
 };
 
-const activeCategory = (state = null, action) => {
-  switch (action.type) {
-    case SET_ACTIVE_CATEGORY:
-      return action.payload;
-    default:
-      return state;
-  }
-};
-
 const todos = (state = [], action) => {
   switch (action.type) {
     case ADD_TODO:
@@ -138,23 +137,7 @@ const todos = (state = [], action) => {
     case SAVE_EDIT_TODO:
       return state.map(todo => {
         if(todo.id === action.todo.id) {
-          return {
-            ...todo,
-            text: action.todo.text,
-            completed: action.todo.completed,
-            description: action.todo.description,
-          }
-        } else {
-          return todo;
-        }
-      });
-    case MOVE_TODO:
-      return state.map(todo => {
-        if(todo.id === action.todoId) {
-          return {
-            ...todo,
-            categoryId: action.categoryId,
-          }
+          return {...action.todo}
         } else {
           return todo;
         }
@@ -164,6 +147,23 @@ const todos = (state = [], action) => {
   }
 };
 
-const rootReducer = combineReducers({todos,categories, modal, activeCategory});
+const todoEditForm = (state = initialTodoEditForm, action) => {
+  switch (action.type) {
+    case FILL_EDIT_TODO_FORM:
+      return {
+        ...state,
+        ...action.todo,
+      }
+    case CHANGE_EDIT_TODO_VALUE:
+      return {
+        ...state,
+        ...action.todoField,
+      }
+    default:
+      return state;
+  }
+}
+
+const rootReducer = combineReducers({todos, categories, modal, todoEditForm});
 
 export default rootReducer;

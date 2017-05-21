@@ -5,7 +5,7 @@ import AddForm from './AddForm';
 
 class TodoList extends React.Component {
 
-  handleSubmit = (name) => {
+  handleSubmit = name => {
     const categoryId = this.props.match.params.categoryId;
     this.props.addTodo(categoryId, name);
   };
@@ -14,9 +14,9 @@ class TodoList extends React.Component {
     const {
       todos,
       toggleTodo,
-      editTodo,
       match,
       history,
+      fillEditTodoForm,
     } = this.props;
     return (
       <div>
@@ -37,7 +37,7 @@ class TodoList extends React.Component {
                   key={todo.id}
                   todo={todo}
                   toggleTodo={toggleTodo}
-                  editTodo={editTodo}
+                  fillEditTodoForm={fillEditTodoForm}
                 />
               ))}
             </ul>

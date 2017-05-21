@@ -1,5 +1,5 @@
 import React from 'react';
-import {Grid, Col, Row} from 'react-bootstrap';
+import {Col, Row} from 'react-bootstrap';
 import { Route } from 'react-router-dom'
 
 import FilterContainer from './FilterContainer';
@@ -19,7 +19,10 @@ const Home = (props) => {
       </Row>
       <Row>
         <Col md={5}>
-          <CategoryListContainer activeCategory={match.params.categoryId} history={props.history}/>
+          <CategoryListContainer
+            activeCategory={match.params.categoryId}
+            history={props.history}
+          />
         </Col>
         <Col md={7}>
           <Route exact path="/:categoryId" component={TodoListContainer}/>

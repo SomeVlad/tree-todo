@@ -6,7 +6,6 @@ export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const OPEN_EDIT_CATEGORY_MODAL = 'OPEN_EDIT_CATEGORY_MODAL';
 export const SAVE_EDIT_CATEGORY = 'SAVE_EDIT_CATEGORY';
 export const DELETE_CATEGORY = 'DELETE_CATEGORY';
-export const SET_ACTIVE_CATEGORY = 'SET_ACTIVE_CATEGORY';
 export const ADD_TODO = 'ADD_TODO';
 export const DELETE_TODOS = 'DELETE_TODOS';
 export const TOGGLE_TODO = 'TOGGLE_TODO';
@@ -14,7 +13,8 @@ export const EDIT_TODO = "EDIT_TODO";
 export const CANCEL_EDIT_TODO = 'CANCEL_EDIT_TODO';
 export const SAVE_EDIT_TODO = 'SAVE_EDIT_TODO';
 export const TOGGLE_COLLAPSE_CATEGORY = 'TOGGLE_COLLAPSE_CATEGORY';
-export const MOVE_TODO = 'MOVE_TODO';
+export const CHANGE_EDIT_TODO_VALUE = "CHANGE_EDIT_TODO_VALUE";
+export const FILL_EDIT_TODO_FORM = "FILL_EDIT_TODO_FORM";
 
 export function addSubCategory(name, parentId) {
   return (dispatch, getState) => {
@@ -78,19 +78,12 @@ export function deleteCategories(categoryId, parentId, categories) {
   }
 }
 
-export function setActiveCategory(id) {
-  return {
-    type: SET_ACTIVE_CATEGORY,
-    payload: id,
-  }
-}
-
-export function addTodo(categoryId, text) {
+export function addTodo(categoryId, name) {
   return {
     type: ADD_TODO,
     payload: {
       categoryId,
-      text,
+      name,
       id: shortid.generate(),
       completed: false,
       description: '',
@@ -126,13 +119,16 @@ export function toggleCollapseCategory(id) {
   }
 }
 
-export function moveTodo(todoId, categoryId) {
-  return dispatch => {
-    dispatch({
-      type: MOVE_TODO,
-      todoId,
-      categoryId,
-    });
-    dispatch(setActiveCategory(categoryId))
+export function fillEditTodoForm(todo) {
+  return {
+    type: FILL_EDIT_TODO_FORM,
+    todo,
+  }
+}
+
+export function changeTodoEditValue(todoField) {
+  return {
+    type: CHANGE_EDIT_TODO_VALUE,
+    todoField,
   }
 }
