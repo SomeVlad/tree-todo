@@ -8,13 +8,13 @@ import TodoListContainer from './TodoListContainer';
 
 
 const Home = (props) => {
-  const { match } = props;
+  const { match, history, location } = props;
   return (
     <div>
       <Row>
         <Col md={6}><h1>Todo List</h1></Col>
         <Col md={6}>
-          <FilterContainer/>
+          <FilterContainer location={location} match={match}  history={history}/>
         </Col>
       </Row>
       <Row>
@@ -22,6 +22,7 @@ const Home = (props) => {
           <CategoryListContainer
             activeCategory={match.params.categoryId}
             history={props.history}
+            location={location}
           />
         </Col>
         <Col md={7}>

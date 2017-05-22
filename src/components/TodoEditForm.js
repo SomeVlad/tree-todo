@@ -18,10 +18,10 @@ class TodoEditForm extends React.Component {
   };
 
   handleCancel = () => {
-    const {resetEditTodoForm, history} = this.props;
+    const {resetEditTodoForm, history, editedTodo} = this.props;
     resetEditTodoForm();
-    history.push('/');
-  }
+    history.push(`/${editedTodo.categoryId}`);
+  };
 
   render() {
     const {
@@ -40,7 +40,11 @@ class TodoEditForm extends React.Component {
           </ButtonToolbar>
         </Col>
         <Col md={12}>
-          <Form className="addForm" inline>
+          <Form
+            className="addForm"
+            inline
+            onSubmit={e => e.preventDefault()}
+          >
             <FormControl
               type="text"
               value={name}

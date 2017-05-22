@@ -16,6 +16,7 @@ export const TOGGLE_COLLAPSE_CATEGORY = 'TOGGLE_COLLAPSE_CATEGORY';
 export const CHANGE_EDIT_TODO_VALUE = "CHANGE_EDIT_TODO_VALUE";
 export const FILL_EDIT_TODO_FORM = "FILL_EDIT_TODO_FORM";
 export const RESET_EDIT_TODO_FORM = 'RESET_EDIT_TODO_FORM';
+export const CHANGE_FILTER = "CHANGE_FILTER";
 
 export function addSubCategory(name, parentId) {
   return (dispatch, getState) => {
@@ -137,5 +138,12 @@ export function changeTodoEditValue(todoField) {
 export function resetEditTodoForm() {
   return {
     type: RESET_EDIT_TODO_FORM,
+  }
+}
+
+export function changeFilters(filters) {
+  return {
+    type: CHANGE_FILTER,
+    filters,
   }
 }

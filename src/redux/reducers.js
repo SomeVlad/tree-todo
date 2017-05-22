@@ -14,6 +14,7 @@ import {
   CHANGE_EDIT_TODO_VALUE,
   FILL_EDIT_TODO_FORM,
   RESET_EDIT_TODO_FORM,
+  CHANGE_FILTER,
 } from './actions';
 
 
@@ -30,7 +31,12 @@ const initialTodoEditForm = {
   completed: false,
   name: '',
   description: '',
-}
+};
+
+const initialFilters = {
+  showDone: false,
+  searchQuery: '',
+};
 
 const categories = (state = [], action) => {
   switch (action.type) {
@@ -154,12 +160,12 @@ const todoEditForm = (state = initialTodoEditForm, action) => {
       return {
         ...state,
         ...action.todo,
-      }
+      };
     case CHANGE_EDIT_TODO_VALUE:
       return {
         ...state,
         ...action.todoField,
-      }
+      };
     case RESET_EDIT_TODO_FORM:
       return {
         id: null,
@@ -167,12 +173,24 @@ const todoEditForm = (state = initialTodoEditForm, action) => {
         completed: false,
         name: '',
         description: '',
-      }
+      };
     default:
       return state;
   }
-}
+};
 
-const rootReducer = combineReducers({todos, categories, modal, todoEditForm});
+const filters = (state = initialFilters, action) => {
+  switch (action.type) {
+    case CHANGE_FILTER:
+      return {
+        ...state,
+        ...action.filters,
+      };
+    default:
+      return state;
+  }
+};
+
+const rootReducer = combineReducers({todos, categories, modal, todoEditForm, filters});
 
 export default rootReducer;

@@ -25,7 +25,7 @@ class TodoEdit extends React.Component {
             <CategoryListContainer editMode/>
           </Col>
           <Col md={7}>
-            <TodoEditFormContainer history={history}/>
+            <TodoEditFormContainer history={history} />
           </Col>
         </Row>
       </div>
