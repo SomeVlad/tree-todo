@@ -4,10 +4,10 @@ import {ButtonToolbar, Button, Col, Form, FormControl} from 'react-bootstrap';
 class TodoEditForm extends React.Component {
 
   handleSave = e => {
-    const {todo, saveEditTodo, history, resetEditTodoForm} = this.props;
-    saveEditTodo(todo);
+    const {editedTodo, saveEditTodo, history, resetEditTodoForm} = this.props;
+    saveEditTodo(editedTodo);
     resetEditTodoForm();
-    history.push('/');
+    history.push(`/${editedTodo.categoryId}`);
   };
 
   handleValueChange = e => {
@@ -25,7 +25,7 @@ class TodoEditForm extends React.Component {
 
   render() {
     const {
-      todo: {name, completed, description},
+      editedTodo: {name, completed, description},
     } = this.props;
     return (
       <div>

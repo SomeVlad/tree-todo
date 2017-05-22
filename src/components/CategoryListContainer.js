@@ -12,7 +12,7 @@ import {
 } from '../redux/actions';
 
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     categories: state.categories,
     todos: state.todos,

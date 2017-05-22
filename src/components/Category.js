@@ -71,6 +71,7 @@ class Category extends React.Component {
       {
         active: active,
         hover: this.state.hover,
+        'edit-mode': this.props.editMode,
       },
     );
 

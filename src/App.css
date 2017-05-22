@@ -19,6 +19,10 @@
     border-color: #337ab7;
 }
 
+.category.edit-mode {
+    cursor: auto;
+}
+
 .category__title {
     margin-left: 30px;
 }

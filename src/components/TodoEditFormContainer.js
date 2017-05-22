@@ -4,7 +4,7 @@ import {saveEditTodo, changeTodoEditValue, resetEditTodoForm} from '../redux/act
 
 const mapStateToProps = (state, ownProps) => {
 	return {
-    todo: state.todoEditForm,
+    editedTodo: state.todoEditForm,
   }
 };
 
