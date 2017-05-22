@@ -55,7 +55,6 @@ class Category extends React.Component {
   handleChangeCategoryId = e => {
     e.stopPropagation();
     const {changeTodoEditValue, category: {id}} = this.props;
-    console.log(id)
     changeTodoEditValue({categoryId: id});
   }
 

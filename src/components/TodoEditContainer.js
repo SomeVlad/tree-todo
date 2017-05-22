@@ -1,13 +1,17 @@
 import React from 'react';
 import {Row, Col} from 'react-bootstrap';
+import {connect} from 'react-redux';
+
 import CategoryListContainer from './CategoryListContainer';
 import TodoEditFormContainer from './TodoEditFormContainer';
+import {fillEditTodoForm} from '../redux/actions';
 
 class TodoEdit extends React.Component {
 
-  componentWillMount = () => {
-
-  }
+  componentWillMount() {
+    const {fillEditTodoForm, editedTodo} = this.props;
+    fillEditTodoForm(editedTodo);
+  };
 
   render(){
     const {match, history} = this.props;
@@ -30,8 +34,11 @@ class TodoEdit extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+  const findEditedTodo = (state, editedTodoId) => {
+    return state.todos.find(todo => todo.id === editedTodoId);
+  };
   return {
-    todos: 
+    editedTodo: findEditedTodo(state, ownProps.match.params.id),
   }
 };
 
