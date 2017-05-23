@@ -40,9 +40,9 @@ class Category extends React.Component {
 
   handleClickCategory = e => {
     e.stopPropagation();
-    const {history, location, category, editMode} = this.props;
+    const {history, location, category, editMode, match} = this.props;
     if(!editMode) {
-      history.push(`/${category.id}${location.search}`);
+      history.push(`/categories/${category.id}${location.search}`);
     }
   };
 

@@ -9,9 +9,9 @@ class Todo extends React.Component {
       history,
       fillEditTodoForm,
     } = this.props;
-    history.push(`edit-todo/${todo.id}`);
+    history.push(`/todo/${todo.id}`);
     fillEditTodoForm(todo);
-  }
+  };
 
   render(){
     const {

@@ -23,10 +23,11 @@ const Home = (props) => {
             activeCategory={match.params.categoryId}
             history={props.history}
             location={location}
+            match={match}
           />
         </Col>
         <Col md={7}>
-          <Route exact path="/:categoryId" component={TodoListContainer}/>
+          <Route exact path="/categories/:categoryId" component={TodoListContainer}/>
         </Col>
       </Row>
     </div>

@@ -7,7 +7,7 @@ class TodoEditForm extends React.Component {
     const {editedTodo, saveEditTodo, history, resetEditTodoForm} = this.props;
     saveEditTodo(editedTodo);
     resetEditTodoForm();
-    history.push(`/${editedTodo.categoryId}`);
+    history.push(`/categories/${editedTodo.categoryId}`);
   };
 
   handleValueChange = e => {
@@ -20,7 +20,7 @@ class TodoEditForm extends React.Component {
   handleCancel = () => {
     const {resetEditTodoForm, history, editedTodo} = this.props;
     resetEditTodoForm();
-    history.push(`/${editedTodo.categoryId}`);
+    history.push(`/categories/${editedTodo.categoryId}`);
   };
 
   render() {
