@@ -51,14 +51,18 @@ class CategoryList extends React.Component {
   };
 
   render(){
-    const { categories, addCategory, editMode } = this.props;
+    const { categories, addCategory, editMode, activeCategory } = this.props;
     const rootCategoriesIds = categories.filter(category => category.parentId === null).map(category => category.id);
     return (
       <div>
+
         <Row>
           {!editMode &&
             <Col md={12}>
               <AddForm onSumbitForm={addCategory} buttonText="Add Category"/>
+              {activeCategory && !categories.some(category => category.id === activeCategory) &&
+                <h3>Категория не найдена</h3>
+              }
             </Col>
           }
         </Row>

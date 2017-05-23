@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import {BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 import {Grid} from 'react-bootstrap';
 
 import ModalContainer from './ModalContainer';
@@ -12,11 +12,14 @@ class App extends Component {
     return (
       <Router>
         <Grid>
-          <Route exact path="/" render={() => (
-              <Redirect to="/categories"/>
-          )}/>
-          <Route exact path="/categories/:categoryId?" component={Home}/>
-          <Route path="/todo/:id" component={TodoEditContainer} />
+          <Switch>
+            <Route exact path="/" render={() => (
+                <Redirect to="/categories"/>
+            )}/>
+            <Route exact path="/categories/:categoryId?" component={Home}/>
+            <Route path="/todo/:id" component={TodoEditContainer} />
+            <Route render={() => <h1 style={{textAlign: 'center'}}>Запрашиваемой страницы не существует</h1>} />
+          </Switch>
           <ModalContainer/>
         </Grid>
       </Router>

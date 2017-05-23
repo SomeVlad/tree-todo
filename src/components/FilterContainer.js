@@ -24,7 +24,6 @@ class Filter extends React.Component {
   }
 
   handleFilterChange = e => {
-    // e.preventDefault();
     const {changeFilters, history, filters, match} = this.props;
     const filter = e.target.name;
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;

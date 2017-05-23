@@ -14,20 +14,26 @@ class TodoEdit extends React.Component {
   };
 
   render(){
-    const {match, history} = this.props;
+    const {match, history, editedTodo} = this.props;
     return (
       <div>
-        <Row>
-          <Col md={12}><h1>To-Do Item #{match.params.id}</h1></Col>
-        </Row>
-        <Row>
-          <Col md={5}>
-            <CategoryListContainer editMode/>
-          </Col>
-          <Col md={7}>
-            <TodoEditFormContainer history={history} />
-          </Col>
-        </Row>
+        {editedTodo ?
+          <div>
+            <Row>
+              <Col md={12}><h1>To-Do Item #{match.params.id}</h1></Col>
+            </Row>
+            <Row>
+              <Col md={5}>
+                <CategoryListContainer editMode/>
+              </Col>
+              <Col md={7}>
+                <TodoEditFormContainer history={history} />
+              </Col>
+            </Row>
+          </div>
+          :
+          <h2>ToDo не найден</h2>
+        }
       </div>
     )
   }

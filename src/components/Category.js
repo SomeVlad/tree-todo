@@ -40,7 +40,7 @@ class Category extends React.Component {
 
   handleClickCategory = e => {
     e.stopPropagation();
-    const {history, location, category, editMode, match} = this.props;
+    const {history, location, category, editMode} = this.props;
     if(!editMode) {
       history.push(`/categories/${category.id}${location.search}`);
     }
@@ -48,8 +48,11 @@ class Category extends React.Component {
 
   handleDeleteCategory = e => {
     e.stopPropagation();
-    const {category: {id, parentId}, deleteCategory} = this.props;
+    const {category: {id, parentId}, deleteCategory, editMode, location, history} = this.props;
     deleteCategory(id, parentId);
+    if(!editMode) {
+      history.push(`/categories/${location.search}`);
+    }
   };
 
   handleChangeCategoryId = e => {
