@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e9f87cb-52ec-4040-b491-052353e0971a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App.js" afterPath="$PROJECT_DIR$/src/components/App.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Category.js" afterPath="$PROJECT_DIR$/src/components/Category.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/CategoryList.js" afterPath="$PROJECT_DIR$/src/components/CategoryList.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/FilterContainer.js" afterPath="$PROJECT_DIR$/src/components/FilterContainer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/TodoEditContainer.js" afterPath="$PROJECT_DIR$/src/components/TodoEditContainer.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -45,7 +41,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TodoEditContainer.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TodoEditContainer.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/TodoEditContainer.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="754">
@@ -78,8 +74,18 @@
       <file leaf-file-name="CategoryList.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/CategoryList.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
-              <caret line="63" column="19" lean-forward="false" selection-start-line="63" selection-start-column="19" selection-end-line="63" selection-end-column="19" />
+            <state relative-caret-position="312">
+              <caret line="40" column="53" lean-forward="false" selection-start-line="40" selection-start-column="39" selection-end-line="40" selection-end-column="53" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Category.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/Category.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="528">
+              <caret line="61" column="33" lean-forward="true" selection-start-line="60" selection-start-column="0" selection-end-line="61" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -107,16 +113,6 @@
               <folding>
                 <element signature="e#0#26#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Category.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Category.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="648">
-              <caret line="54" column="5" lean-forward="true" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -225,10 +221,10 @@
         <option value="$PROJECT_DIR$/src/components/Home.js" />
         <option value="$PROJECT_DIR$/src/components/CategoryListContainer.js" />
         <option value="$PROJECT_DIR$/src/components/FilterContainer.js" />
-        <option value="$PROJECT_DIR$/src/components/CategoryList.js" />
-        <option value="$PROJECT_DIR$/src/components/Category.js" />
         <option value="$PROJECT_DIR$/src/components/App.js" />
         <option value="$PROJECT_DIR$/src/components/TodoEditContainer.js" />
+        <option value="$PROJECT_DIR$/src/components/CategoryList.js" />
+        <option value="$PROJECT_DIR$/src/components/Category.js" />
       </list>
     </option>
   </component>
@@ -462,7 +458,7 @@
       <workItem from="1494932144982" duration="5519000" />
       <workItem from="1494939948189" duration="12607000" />
       <workItem from="1495017081217" duration="50617000" />
-      <workItem from="1495528026324" duration="4219000" />
+      <workItem from="1495528026324" duration="6983000" />
     </task>
     <task id="LOCAL-00001" summary="endless nested categories added">
       <created>1494004055129</created>
@@ -482,7 +478,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="251835000" />
+    <option name="totallyTimeSpent" value="254599000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -494,7 +490,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13962065" sideWeight="0.80225986" order="0" side_tool="false" content_ui="combo" />
@@ -854,14 +850,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Category.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="54" column="5" lean-forward="true" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/FilterContainer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="912">
@@ -881,14 +869,6 @@
           <folding>
             <element signature="e#0#26#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/CategoryList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="63" column="19" lean-forward="false" selection-start-line="63" selection-start-column="19" selection-end-line="63" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -920,6 +900,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="754">
           <caret line="33" column="11" lean-forward="true" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/CategoryList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="40" column="53" lean-forward="false" selection-start-line="40" selection-start-column="39" selection-end-line="40" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Category.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="61" column="33" lean-forward="true" selection-start-line="60" selection-start-column="0" selection-end-line="61" selection-end-column="33" />
           <folding />
         </state>
       </provider>

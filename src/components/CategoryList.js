@@ -38,6 +38,7 @@ class CategoryList extends React.Component {
           <Category
             {...this.props}
             active={this.props.activeCategory === category.id}
+            activeCategory={this.props.activeCategory}
             key={category.id}
             category={category}
             deleteCategory={this.handleDeleteCategory}

@@ -40,9 +40,13 @@ class Category extends React.Component {
 
   handleClickCategory = e => {
     e.stopPropagation();
-    const {history, location, category, editMode} = this.props;
+    const {history, location, category, editMode, activeCategory} = this.props;
     if(!editMode) {
-      history.push(`/categories/${category.id}${location.search}`);
+      if(activeCategory === category.id) {
+        history.push(`/categories/${location.search}`);
+      } else {
+        history.push(`/categories/${category.id}${location.search}`);
+      }
     }
   };
 
@@ -59,7 +63,7 @@ class Category extends React.Component {
     e.stopPropagation();
     const {changeTodoEditValue, category: {id}} = this.props;
     changeTodoEditValue({categoryId: id});
-  }
+  };
 
   render() {
     const {
