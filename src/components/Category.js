@@ -52,9 +52,9 @@ class Category extends React.Component {
 
   handleDeleteCategory = e => {
     e.stopPropagation();
-    const {category: {id, parentId}, deleteCategory, editMode, location, history} = this.props;
-    deleteCategory(id, parentId);
-    if(!editMode) {
+    const {category: {id, parentId}, deleteCategory, location, history} = this.props;
+    if(confirm('Удалить категорию и все подкатегории?')) {
+      deleteCategory(id, parentId);
       history.push(`/categories/${location.search}`);
     }
   };

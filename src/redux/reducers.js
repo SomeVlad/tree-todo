@@ -41,24 +41,23 @@ const initialFilters = {
 const categories = (state = [], action) => {
   switch (action.type) {
     case ADD_CATEGORY:
-      const newCategory = action.payload;
       const newState = state.map(category => {
-        if(category.id === newCategory.parentId) {
+        if(category.id === action.category.parentId) {
           return {
             ...category,
-            children: [...category.children, newCategory.id]
+            children: [...category.children, action.category.id]
           }
         } else {
           return category
         }
       });
-      return [newCategory, ...newState];
+      return [action.category, ...newState];
     case SAVE_EDIT_CATEGORY:
       return state.map(category => {
-        if(category.id === action.payload.id) {
+        if(category.id === action.id) {
           return {
             ...category,
-            name: action.payload.name
+            name: action.name
           }
         } else {
           return category;
@@ -125,14 +124,14 @@ const todos = (state = [], action) => {
   switch (action.type) {
     case ADD_TODO:
       return [
+        action.todo,
         ...state,
-        action.payload,
       ];
     case DELETE_TODOS:
-      return state.filter(todo => action.payload.indexOf(todo.id) === -1);
+      return state.filter(todo => action.todos.indexOf(todo.id) === -1);
     case TOGGLE_TODO:
       return state.map(todo => {
-        if(todo.id === action.payload) {
+        if(todo.id === action.id) {
           return {
             ...todo,
             completed: !todo.completed,

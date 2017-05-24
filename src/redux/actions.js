@@ -31,7 +31,7 @@ export function addSubCategory(name, parentId) {
 export function addCategory(name, parentId) {
   return {
     type: ADD_CATEGORY,
-    payload: {
+    category: {
       name,
       id: shortid.generate(),
       parentId: parentId || null,
@@ -64,10 +64,8 @@ export function openEditCategoryModal(id) {
 export function saveCategory(id, name) {
   return {
     type: SAVE_EDIT_CATEGORY,
-    payload: {
-      id,
-      name,
-    }
+    id,
+    name,
   }
 }
 
@@ -83,7 +81,7 @@ export function deleteCategories(categoryId, parentId, categories) {
 export function addTodo(categoryId, name) {
   return {
     type: ADD_TODO,
-    payload: {
+    todo: {
       categoryId,
       name,
       id: shortid.generate(),
@@ -96,14 +94,14 @@ export function addTodo(categoryId, name) {
 export function deleteTodos(todos) {
   return {
     type: DELETE_TODOS,
-    payload: todos,
+    todos,
   }
 }
 
 export function toggleTodo(id) {
   return {
     type: TOGGLE_TODO,
-    payload: id,
+    id,
   }
 }
 
